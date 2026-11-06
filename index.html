@@ -7,14 +7,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Unsergram">
+<meta name="apple-mobile-web-app-title" content="Denisegram">
 <meta name="robots" content="noindex, nofollow">
-<title>Unsergram</title>
+<title>Denisegram</title>
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon-192.png?v=4">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
+<link rel="icon" href="icon-192.png?v=1">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <style>
 :root{
@@ -46,7 +46,7 @@ button{font:inherit;color:inherit}
 .topbar{position:sticky;top:0;z-index:20;background:var(--bg);display:flex;align-items:center;
   justify-content:space-between;gap:8px;padding:env(safe-area-inset-top) 10px 0 16px;
   height:calc(48px + env(safe-area-inset-top));border-bottom:1px solid var(--line)}
-.wordmark{font-family:'Grand Hotel',cursive;font-size:30px;font-weight:400;line-height:1;white-space:nowrap}
+.wordmark{font-family:'Dancing Script',cursive;font-size:30px;font-weight:700;line-height:1;white-space:nowrap}
 .topbar h1{font-size:17px;margin:0;font-weight:700}
 .icon-btn{background:none;border:0;padding:7px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .icon-btn svg{width:25px;height:25px}
@@ -306,7 +306,7 @@ label.fl{display:block;font-weight:600;margin:14px 0 6px}
 .rl small{color:var(--muted)}
 .vtitle{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 26px}
 .vtitle small{font-size:14px;letter-spacing:.5px;text-transform:uppercase;opacity:.85}
-.vtitle b{font-family:'Grand Hotel',cursive;font-size:50px;line-height:1.05;margin:10px 0}
+.vtitle b{font-family:'Dancing Script',cursive;font-size:50px;font-weight:700;line-height:1.05;margin:10px 0}
 .vtitle span{font-size:16px;opacity:.9}
 .vpost-cap{position:absolute;left:0;right:0;bottom:0;padding:50px 18px calc(26px + env(safe-area-inset-bottom));
   background:linear-gradient(transparent,rgba(0,0,0,.65));z-index:3;pointer-events:none}
@@ -533,12 +533,9 @@ const CONFIG = {
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3c3NzbmNmenZ2dnN6eXl3bWJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5NjcxODcsImV4cCI6MjEwOTU0MzE4N30.etQMYj_JfrUVhBq-RLiehJh-_1krZPteYzZI1qNpXDk'
 };
 
-const APP_NAME = 'Unsergram';
-const APP_VERSION = '6.11.-1';
-const USERS = {
-  je:   { id:'je',   nick:'j from e', email:'je@ebbing-project.de', fixedNick:true,  emoji:'🙂', sound:'glocke' },
-  anke: { id:'anke', nick:'Anke',     email:'',                     fixedNick:false, emoji:'🌻', sound:'kuh' }
-};
+const APP_NAME = 'Denisegram';
+const APP_VERSION = '1.0';
+const MAX_PEOPLE = 10;
 const DAY = 864e5;
 const GRADS = [
   'linear-gradient(135deg,#ff7a59,#e8457c)',
@@ -547,23 +544,8 @@ const GRADS = [
   'linear-gradient(135deg,#43c6ac,#2b8a99)',
   'linear-gradient(135deg,#2b2b2b,#555555)'
 ];
-const EMOJIS = ['🙂','😎','🦊','🐻','🐶','🐱','🦁','🐧','🌻','🌸','🌙','☀️','🔥','🎸','🎧','⚓️','🚲','🏡','❤️','✨','🍀','🐘','🐄','🪿'];
-const CHALLENGES = [
-  'Das schönste Licht heute', 'Ein Geräusch, das mich glücklich macht', 'Etwas, wofür ich heute dankbar bin',
-  'Ein Lächeln, das ich gesehen habe', 'Die kleinste Geste von heute', 'Ein Ort, an dem ich mich wohlfühle',
-  'Ein Mensch, der mich zum Lachen bringt', 'Etwas Altes, das noch schön ist', 'Ein Traum von heute Nacht',
-  'Ein Duft, den ich mag', 'Etwas, das ich gelernt habe', 'Ein Versprechen an morgen', 'Die Farbe des Tages',
-  'Ein Lied, das zu mir passt', 'Etwas, das ich teilen will', 'Ein Fensterblick', 'Etwas, das ich berühre und liebe',
-  'Ein Gedanke an jemanden', 'Die beste Minute heute', 'Etwas, das ich sonst übersähe', 'Ein Neuanfang heute'
-];
-const CH_START = new Date(2026, 10, 2).getTime(); // Montag, 2.11.2026 = Challenge 1
-const SOUND_LIST = [
-  ['kuh','🐄','Kuh'], ['hund','🐶','Hund'], ['elefant','🐘','Elefant'], ['gans','🪿','Gans'],
-  ['katze','🐱','Katze'], ['ente','🦆','Ente'], ['frosch','🐸','Frosch'], ['hahn','🐓','Hahn'],
-  ['schaf','🐑','Schaf'], ['hupe','📯','Hupe'], ['glocke','🔔','Glocke'], ['kuss','💋','Kuss'],
-  ['fanfare','🎺','Fanfare'], ['herz','💓','Herzschlag'], ['pling','✨','Pling'], ['alarm','🚨','Alarm']
-];
-const soundInfo = id => SOUND_LIST.find(s => s[0] === id) || SOUND_LIST[10];
+const EMOJIS = ['🙂','😎','🦊','🐻','🐶','🐱','🦁','🐧','🌻','🌸','🌙','☀️','🔥','🎸','🎧','⚓️','🚲','🏡','❤️','✨','🍀','🐘','🦋','🍓'];
+const COLORS = ['#e8457c','#ff7a59','#ffc15e','#43c6ac','#4facfe','#7b61ff','#b46cff','#2b2b2b','#8d6e63','#9ccc65'];
 
 /* ---------- Helfer ---------- */
 const $ = (s, r=document) => r.querySelector(s);
@@ -574,7 +556,8 @@ const isAndroid = () => /Android/i.test(navigator.userAgent);
 const isSamsungBrowser = () => /SamsungBrowser/i.test(navigator.userAgent);
 const isInAppBrowser = () => /(FBAN|FBAV|Instagram|WhatsApp|Line\/|wv\))/i.test(navigator.userAgent);
 function chromeIntentURL(){
-  const q = S.onb && S.onb.secret ? (S.onb.mode === 'restore' ? `?restore=${S.onb.secret}-${S.onb.role}` : `?join=${S.onb.secret}`) : '';
+  const o = S.onb || {};
+  const q = o.mode === 'restore' && o.restore ? `?restore=${o.restore}` : o.token ? `?join=${o.token}` : '';
   return `intent://${location.host}${location.pathname}${q}#Intent;scheme=https;package=com.android.chrome;end`;
 }
 const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -602,14 +585,6 @@ function dayLabel(t){
   return new Date(t).toLocaleDateString('de-DE', {weekday:'long', day:'numeric', month:'long'});
 }
 function shortDate(t){ const d = new Date(t); return `${d.getDate()}<br>${d.toLocaleDateString('de-DE',{month:'short'}).replace('.','')}`; }
-function weekStart(t){ const d = new Date(t); d.setHours(0,0,0,0); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return d.getTime(); }
-function addDays(t, n){ const d = new Date(t); d.setDate(d.getDate() + n); return d.getTime(); }
-function challengeFor(t){
-  const ws = weekStart(t);
-  const n = Math.round((ws - weekStart(CH_START)) / (7*DAY));
-  const idx = ((n % CHALLENGES.length) + CHALLENGES.length) % CHALLENGES.length;
-  return { idx, week:ws, text:CHALLENGES[idx], id:'w' + dmy(ws) + new Date(ws).getFullYear() };
-}
 
 let toastT;
 function toast(msg){
@@ -660,81 +635,27 @@ const I = {
   play:     sv('<path d="M7 4.5v15l12-7.5z"/>'),
   bell:     sv('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>')
 };
-
-/* ---------- Klänge (synthetisch, keine Dateien) ---------- */
-const Sound = {
-  ctx:null,
-  unlock(){
-    try {
-      if (!this.ctx) { const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return; this.ctx = new AC(); }
-      if (this.ctx.state === 'suspended') this.ctx.resume();
-    } catch (_) {}
-  },
-  play(name){ this.unlock(); const c = this.ctx; if (!c) return; (SYNTH[name] || SYNTH.glocke)(c, c.currentTime + 0.03); }
-};
-function osc(c, t, o){
-  const { type='sine', f0, f1=f0, dur, vol=.3, attack=.02, release=.08, filter, vib=0, vibRate=6, lin=false } = o;
-  const s = c.createOscillator(); s.type = type; s.frequency.setValueAtTime(f0, t);
-  if (f1 !== f0) lin ? s.frequency.linearRampToValueAtTime(f1, t + dur) : s.frequency.exponentialRampToValueAtTime(f1, t + dur);
-  const g = c.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + attack);
-  g.gain.setValueAtTime(vol, t + Math.max(attack, dur - release)); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  let node = s;
-  if (filter) { const bf = c.createBiquadFilter(); bf.type = filter.type || 'lowpass'; bf.frequency.value = filter.f; bf.Q.value = filter.q || 1; s.connect(bf); node = bf; }
-  if (vib) { const l = c.createOscillator(); l.frequency.value = vibRate; const lg = c.createGain(); lg.gain.value = vib; l.connect(lg); lg.connect(s.frequency); l.start(t); l.stop(t + dur); }
-  node.connect(g); g.connect(c.destination); s.start(t); s.stop(t + dur + .05);
-}
-function noise(c, t, { dur, vol=.3, filter={type:'bandpass', f:1000, q:1} }){
-  const n = Math.floor(c.sampleRate * dur), b = c.createBuffer(1, n, c.sampleRate), d = b.getChannelData(0);
-  for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
-  const src = c.createBufferSource(); src.buffer = b;
-  const bf = c.createBiquadFilter(); bf.type = filter.type; bf.frequency.value = filter.f; bf.Q.value = filter.q || 1;
-  const g = c.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  src.connect(bf); bf.connect(g); g.connect(c.destination); src.start(t); src.stop(t + dur);
-}
-const SYNTH = {
-  kuh:(c,t)=>{ osc(c,t,{type:'sawtooth',f0:150,f1:112,dur:1.4,vol:.35,attack:.18,release:.45,filter:{f:520,q:5},vib:3,vibRate:5});
-               osc(c,t,{type:'sawtooth',f0:153,f1:110,dur:1.4,vol:.2,attack:.2,release:.45,filter:{f:700,q:3}}); },
-  hund:(c,t)=>{ [0,.28].forEach(o=>{ noise(c,t+o,{dur:.11,vol:.45,filter:{type:'bandpass',f:950,q:.9}}); osc(c,t+o,{type:'square',f0:430,f1:230,dur:.15,vol:.25,attack:.005,release:.06,filter:{f:1600}}); }); },
-  elefant:(c,t)=>{ osc(c,t,{type:'sawtooth',f0:500,f1:950,dur:.35,vol:.3,lin:true,filter:{type:'bandpass',f:1300,q:2},vib:25,vibRate:12});
-                   osc(c,t+.35,{type:'sawtooth',f0:950,f1:640,dur:.7,vol:.3,release:.3,filter:{type:'bandpass',f:1300,q:2},vib:30,vibRate:12}); },
-  gans:(c,t)=>{ osc(c,t,{type:'square',f0:390,f1:340,dur:.2,vol:.33,attack:.01,filter:{type:'bandpass',f:900,q:3}});
-                osc(c,t+.28,{type:'square',f0:370,f1:320,dur:.24,vol:.33,attack:.01,filter:{type:'bandpass',f:900,q:3}}); },
-  katze:(c,t)=>{ osc(c,t,{type:'sawtooth',f0:460,f1:820,dur:.32,vol:.22,lin:true,filter:{f:2200},vib:8});
-                 osc(c,t+.32,{type:'sawtooth',f0:820,f1:430,dur:.5,vol:.22,release:.25,filter:{f:1800},vib:8}); },
-  ente:(c,t)=>{ [0,.2,.4].forEach(o=>osc(c,t+o,{type:'sawtooth',f0:290,f1:220,dur:.13,vol:.4,attack:.005,release:.05,filter:{type:'bandpass',f:1150,q:5}})); },
-  frosch:(c,t)=>{ [0,.5].forEach(g=>{ for(let i=0;i<6;i++) osc(c,t+g+i*.05,{type:'square',f0:185,dur:.035,vol:.3,attack:.003,release:.02,filter:{f:800}}); }); },
-  hahn:(c,t)=>{ const f={type:'bandpass',f:1500,q:2}; osc(c,t,{type:'sawtooth',f0:600,f1:920,dur:.13,vol:.25,filter:f});
-                osc(c,t+.15,{type:'sawtooth',f0:900,f1:860,dur:.13,vol:.25,filter:f}); osc(c,t+.3,{type:'sawtooth',f0:860,f1:1150,dur:.16,vol:.25,filter:f});
-                osc(c,t+.48,{type:'sawtooth',f0:1150,f1:700,dur:.6,vol:.25,release:.3,filter:f,vib:18,vibRate:22}); },
-  schaf:(c,t)=>{ osc(c,t,{type:'sawtooth',f0:390,f1:350,dur:.95,vol:.28,attack:.05,release:.3,filter:{type:'bandpass',f:1200,q:3},vib:28,vibRate:7}); },
-  hupe:(c,t)=>{ [0,.5].forEach(o=>{ osc(c,t+o,{type:'square',f0:440,dur:.4,vol:.16,attack:.01,filter:{f:2500}}); osc(c,t+o,{type:'square',f0:554,dur:.4,vol:.16,attack:.01,filter:{f:2500}}); }); },
-  glocke:(c,t)=>{ osc(c,t,{f0:880,dur:1.7,vol:.35,attack:.005,release:1.6}); osc(c,t,{f0:1760,dur:1.2,vol:.12,attack:.005,release:1.1}); osc(c,t,{f0:2640,dur:.8,vol:.06,attack:.005,release:.7}); },
-  kuss:(c,t)=>{ noise(c,t,{dur:.05,vol:.5,filter:{type:'highpass',f:2000,q:.7}}); osc(c,t+.03,{f0:1300,f1:420,dur:.09,vol:.3,attack:.005,release:.05}); },
-  fanfare:(c,t)=>{ [523,659,784,1047].forEach((f,i)=>osc(c,t+i*.14,{type:'sawtooth',f0:f,dur:i===3?.5:.15,vol:.18,attack:.01,release:i===3?.3:.05,filter:{f:3000}})); },
-  herz:(c,t)=>{ [0,.9].forEach(o=>{ osc(c,t+o,{f0:75,f1:50,dur:.16,vol:.7,attack:.005,release:.1}); osc(c,t+o+.24,{f0:70,f1:48,dur:.14,vol:.5,attack:.005,release:.09}); }); },
-  pling:(c,t)=>{ osc(c,t,{f0:1320,dur:.35,vol:.3,attack:.005,release:.3}); osc(c,t+.08,{f0:1980,dur:.4,vol:.15,attack:.005,release:.35}); },
-  alarm:(c,t)=>{ for(let i=0;i<10;i++) osc(c,t+i*.25,{type:'square',f0:i%2?650:950,dur:.24,vol:.22,attack:.005,release:.02,filter:{f:3000}}); }
-};
-['pointerdown','keydown','touchstart'].forEach(ev => document.addEventListener(ev, () => Sound.unlock(), {passive:true}));
+I.menu = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M4 6.5h16M4 12h16M4 17.5h16"/></svg>`;
 
 /* ---------- Lokaler Speicher (IndexedDB) ---------- */
 const TABLES = {
+  people:{ key:r => r.id },
   profiles:{ key:r => r.role },
   posts:{ key:r => r.id },
   reactions:{ key:r => r.post_id + '|' + r.role },
   comments:{ key:r => r.id },
   stories:{ key:r => r.id },
   story_views:{ key:r => r.story_id + '|' + r.role },
-  messages:{ key:r => r.id },
-  pings:{ key:r => r.id }
+  messages:{ key:r => r.id }
 };
+const READONLY = new Set(['people']);
 const DB = (() => {
   let dbp;
   const STORES = [...Object.keys(TABLES), 'media', 'meta', 'outbox'];
   function open(){
     if (dbp) return dbp;
     dbp = new Promise((res, rej) => {
-      const r = indexedDB.open('anke-joerg-v2', 1);
+      const r = indexedDB.open('denisegram-v1', 1);
       r.onupgradeneeded = () => STORES.forEach(s => { if (!r.result.objectStoreNames.contains(s)) r.result.createObjectStore(s); });
       r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
     });
@@ -755,29 +676,36 @@ const meta = { get: k => DB.get('meta', k), set: (k, v) => DB.put('meta', v, k) 
 
 /* ---------- Zustand ---------- */
 const D = {}; Object.keys(TABLES).forEach(t => D[t] = new Map());
-const S = { me:null, spaceId:null, secret:null, tab:'home', profileOf:null, profileTab:'grid', q:'', feedMode:'all', onb:null, handled:new Set(), recapSeen:new Set() };
-const other = () => S.me === 'je' ? 'anke' : 'je';
-const prof  = r => D.profiles.get(r) || { role:r, nick:USERS[r].nick, emoji:USERS[r].emoji, sound:USERS[r].sound, avatar_path:null };
-const nick  = r => r === 'je' ? USERS.je.nick : (prof(r).nick || USERS[r].nick);
-const posts = () => [...D.posts.values()].filter(p => !p.deleted).sort((a,b) => b.created_at - a.created_at);
-const likesOf = id => [...D.reactions.values()].filter(r => r.post_id === id && r.on && !String(r.role).includes(':')).sort((a,b) => a.at - b.at);
+const S = { me:null, spaceId:null, isOwner:false, restore:null, removed:false, tab:'home', chatWith:null, profileOf:null, profileTab:'grid', q:'', feedMode:'all', onb:null };
+const isActive = pid => { const p = D.people.get(pid); return !p || !p.removed_at; };
+const activePids = () => [...D.people.values()].filter(p => !p.removed_at).map(p => p.id);
+const others = () => activePids().filter(p => p !== S.me);
+const prof  = r => D.profiles.get(r) || { role:r, nick:'Mitglied', emoji:'🙂', avatar_path:null };
+const nick  = r => prof(r).nick || 'Mitglied';
+const slug  = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ß/g, 'ss').replace(/\s+/g, '_').replace(/[^a-z0-9._]/g, '').slice(0, 24);
+const uname = r => prof(r).username || slug(nick(r)) || 'mitglied';
+const colorOf = r => { const c = prof(r).color; return /^#[0-9a-f]{6}$/i.test(c || '') ? c : ''; };
+const posts = () => [...D.posts.values()].filter(p => !p.deleted && isActive(p.author)).sort((a,b) => b.created_at - a.created_at);
+const likesOf = id => [...D.reactions.values()].filter(r => r.post_id === id && r.on && !String(r.role).includes(':') && isActive(r.role)).sort((a,b) => a.at - b.at);
 const marks = (id, kind) => [...D.reactions.values()].filter(r => r.post_id === id && r.on && String(r.role).endsWith(':' + kind));
 const msgText = t => { const m = /^\[\[post:([\w-]+)\]\]$/.exec(t || ''); return m ? '📎 hat dir einen Beitrag geschickt' : t; };
 const isFav = id => { const r = D.reactions.get(id + '|' + S.me + ':fav'); return !!(r && r.on); };
-const commentsOf = id => [...D.comments.values()].filter(c => c.post_id === id && !c.deleted).sort((a,b) => a.created_at - b.created_at);
-const storiesAll = () => [...D.stories.values()].filter(s => !s.deleted).sort((a,b) => a.created_at - b.created_at);
+const commentsOf = id => [...D.comments.values()].filter(c => c.post_id === id && !c.deleted && isActive(c.author)).sort((a,b) => a.created_at - b.created_at);
+const storiesAll = () => [...D.stories.values()].filter(s => !s.deleted && isActive(s.author)).sort((a,b) => a.created_at - b.created_at);
 const storiesOf = (r, active) => storiesAll().filter(s => s.author === r && (!active || Date.now() - s.created_at < DAY));
-const viewersOf = id => [...D.story_views.values()].filter(v => v.story_id === id).map(v => v.role);
-const messages = () => [...D.messages.values()].filter(m => !m.deleted).sort((a,b) => a.created_at - b.created_at);
-const unread = () => messages().filter(m => m.author !== S.me && !m.read_at).length;
-const pings = () => [...D.pings.values()].sort((a,b) => b.created_at - a.created_at);
+const viewersOf = id => [...D.story_views.values()].filter(v => v.story_id === id && isActive(v.role)).map(v => v.role);
+const messages = () => [...D.messages.values()].filter(m => !m.deleted && (m.author === S.me || m.to_pid === S.me)).sort((a,b) => a.created_at - b.created_at);
+const chatMsgs = pid => messages().filter(m => (m.author === S.me && m.to_pid === pid) || (m.author === pid && m.to_pid === S.me));
+const unreadFrom = pid => messages().filter(m => m.author === pid && m.to_pid === S.me && !m.read_at).length;
+const unread = () => messages().filter(m => m.to_pid === S.me && !m.read_at && isActive(m.author)).length;
+const nameList = names => names.length <= 2 ? names.join('</b> und <b>') : `${names[0]}</b> und <b>${names.length - 1} weiteren Personen`;
 
 /* ---------- Abgleich mit Supabase ---------- */
 const Sync = {
   sb:null, ready:false, channel:null, status:'lokal',
   get configured(){ return !!(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY && window.supabase); },
   client(){
-    if (!this.sb && this.configured) this.sb = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY, { auth:{ persistSession:true, autoRefreshToken:true, storageKey:'aj-auth' } });
+    if (!this.sb && this.configured) this.sb = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY, { auth:{ persistSession:true, autoRefreshToken:true, storageKey:'dg-auth' } });
     return this.sb;
   },
   async ensureAuth(){
@@ -788,11 +716,16 @@ const Sync = {
     return { session, fresh };
   },
   async start(){
-    if (!this.configured || !S.spaceId || S.spaceId === 'local') { this.status = 'lokal'; return; }
+    if (!this.configured || !S.spaceId) { this.status = 'lokal'; return; }
     try {
       const { fresh } = await this.ensureAuth();
-      if (fresh && S.secret) { const r = await this.sb.rpc('join_space', { p_secret:S.secret, p_role:S.me }); if (r.error) throw r.error; }
-      try { const ms = await this.sb.rpc('my_space'); if (!ms.error && ms.data && ms.data.space_id && ms.data.space_id !== S.spaceId) await switchSpace(ms.data); } catch (_) {}
+      if (fresh && S.restore) { const r = await this.sb.rpc('restore_device', { p_restore:S.restore }); if (r.error && /nicht mehr/i.test(r.error.message || '')) { await setRemoved(); return; } if (r.error) throw r.error; }
+      const ms = await this.sb.rpc('my_space');
+      if (ms.error) throw ms.error;
+      if (!ms.data) {
+        if (S.restore) { const r = await this.sb.rpc('restore_device', { p_restore:S.restore }); if (r.error) { if (/nicht mehr|ungültig/i.test(r.error.message || '')) { await setRemoved(); return; } throw r.error; } }
+        else { await setRemoved(); return; }
+      } else if (ms.data.pid === S.me) { S.isOwner = !!ms.data.is_owner; S.restore = ms.data.restore || S.restore; await saveDevice(); }
       this.ready = true; this.status = 'verbunden';
       this.subscribe(); await this.pull(); Outbox.flush();
     } catch (e) { this.status = 'offline'; console.warn('Sync', e); setTimeout(() => this.start(), 20000); }
@@ -806,11 +739,7 @@ const Sync = {
   },
   async pull(){
     if (!this.ready) return;
-    const res = await Promise.all(Object.keys(TABLES).map(t => {
-      let q = this.sb.from(t).select('*').eq('space_id', S.spaceId);
-      if (t === 'pings') q = q.gte('created_at', Date.now() - 30*DAY);
-      return q.then(r => [t, r]);
-    }));
+    const res = await Promise.all(Object.keys(TABLES).map(t => this.sb.from(t).select('*').eq('space_id', S.spaceId).then(r => [t, r])));
     const pend = await Outbox.pendingKeys();
     for (const [t, { data, error }] of res) {
       if (error) { console.warn(t, error); Outbox.lastError = t + ': ' + error.message; continue; }
@@ -818,11 +747,14 @@ const Sync = {
       data.forEach(row => { const k = TABLES[t].key(row); if (pend.has(t + '|' + k)) return; const prev = D[t].get(k); D[t].set(k, row); items.push([k, row]); effects(t, row, prev, false); });
       if (items.length) await DB.putMany(t, items);
     }
+    const me = D.people.get(S.me);
+    if (me && me.removed_at) { await setRemoved(); return; }
     scheduleRender();
   },
-  async push(kind, title, body, urgent){
-    if (!this.ready) return;
-    try { await this.sb.functions.invoke('send-push', { body:{ space_id:S.spaceId, kind, title, body, urgent:!!urgent, tag:kind } }); } catch (_) {}
+  // to: 'all' (alle anderen) · pid (eine Person) · self:true (Test an mich)
+  async push(kind, title, body, to){
+    if (!this.ready || !to || to === S.me) return;
+    try { await this.sb.functions.invoke('send-push', { body:{ space_id:S.spaceId, kind, title, body, tag:kind, to } }); } catch (_) {}
   }
 };
 const Outbox = {
@@ -843,6 +775,8 @@ const Outbox = {
           if (job.type === 'upload') {
             const m = await DB.get('media', job.path);
             if (m) { const r = await Sync.sb.storage.from('media').upload(job.path, m.blob, { contentType:m.blob.type || 'image/jpeg', upsert:true }); err = r.error; }
+          } else if (job.type === 'patch') {
+            const r = await Sync.sb.from(job.table).update(job.set).eq('id', job.id); err = r.error;
           } else if (job.type === 'remove') {
             await Sync.sb.storage.from('media').remove([job.path]);
           } else {
@@ -872,40 +806,42 @@ const Outbox = {
 };
 window.addEventListener('online', () => { Outbox.flush(); if (Sync.ready) Sync.pull(); });
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && Sync.ready) { Sync.pull(); Outbox.flush(); } });
-
-async function switchSpace(d){
-  const old = S.spaceId;
-  S.spaceId = d.space_id; if (d.secret) S.secret = d.secret;
-  await meta.set('device', { user:S.me, spaceId:S.spaceId, secret:S.secret });
-  for (const [k, job] of await DB.entries('outbox')) { if (job.row && job.row.space_id === old) { job.row.space_id = S.spaceId; await DB.put('outbox', job, k); } }
-  toast('Mit eurem gemeinsamen Raum verbunden ✓');
+async function saveDevice(){ await meta.set('device', { pid:S.me, spaceId:S.spaceId, isOwner:S.isOwner, restore:S.restore }); }
+async function setRemoved(){
+  S.removed = true; Sync.ready = false; Sync.status = 'entfernt';
+  if (Sync.channel) { try { Sync.sb.removeChannel(Sync.channel); } catch (_) {} Sync.channel = null; }
+  scheduleRender();
 }
 async function put(table, row){
   row.space_id = S.spaceId;
   const k = TABLES[table].key(row);
   D[table].set(k, row);
   await DB.put(table, row, k);
-  if (Sync.configured && S.spaceId !== 'local') Outbox.add({ type:'row', table, row });
+  if (Sync.configured && S.spaceId) Outbox.add({ type:'row', table, row });
+}
+// Nur einzelne Felder ändern (z. B. "gelesen" beim Empfänger – der darf die Nachricht nicht als Ganzes schreiben)
+async function patch(table, row, set){
+  const k = TABLES[table].key(row); const nr = { ...row, ...set };
+  D[table].set(k, nr); await DB.put(table, nr, k);
+  if (Sync.configured && S.spaceId) Outbox.add({ type:'patch', table, id:row.id, set });
 }
 function onRemote(t, row, live){
   const k = TABLES[t].key(row); const prev = D[t].get(k);
   if (t === 'profiles' && prev && prev.updated_at && row.updated_at && prev.updated_at > row.updated_at) return;
   D[t].set(k, row); DB.put(t, row, k);
+  if (t === 'people' && row.id === S.me && row.removed_at) { setRemoved(); return; }
   effects(t, row, prev, live);
   scheduleRender();
 }
 function effects(t, row, prev, live){
-  if (t === 'pings' && row.from_role !== S.me && !S.handled.has(row.id) && Date.now() - row.created_at < 3*60000) {
-    S.handled.add(row.id); meta.set('handled', [...S.handled].slice(-200)); showPingAlert(row);
-  }
   if (!live || prev) return;
-  if (t === 'messages' && row.author !== S.me) {
-    if (S.tab === 'chat' && document.visibilityState === 'visible') markRead();
-    else { Sound.play('pling'); toast(`💬 ${nick(row.author)}: ${msgText(row.text).slice(0, 60)}`); }
+  if (t === 'messages' && row.author !== S.me && row.to_pid === S.me) {
+    if (S.tab === 'chat' && S.chatWith === row.author && document.visibilityState === 'visible') markRead();
+    else toast(`💬 ${nick(row.author)}: ${msgText(row.text).slice(0, 60)}`);
   }
-  if (t === 'posts' && row.author !== S.me) { Sound.play('pling'); toast(`✨ ${nick(row.author)} hat einen Moment geteilt`); }
-  if (t === 'stories' && row.author !== S.me) { Sound.play('pling'); toast(`⭕ ${nick(row.author)} hat eine Story geteilt`); }
-  if (t === 'comments' && row.author !== S.me) { Sound.play('pling'); toast(`💬 ${nick(row.author)} hat kommentiert`); }
+  if (t === 'posts' && row.author !== S.me) toast(`✨ ${nick(row.author)} hat einen Beitrag geteilt`);
+  if (t === 'stories' && row.author !== S.me) toast(`⭕ ${nick(row.author)} hat eine Story geteilt`);
+  if (t === 'comments' && row.author !== S.me) { const p = D.posts.get(row.post_id); if (p && p.author === S.me) toast(`💬 ${nick(row.author)} hat kommentiert`); }
 }
 
 /* ---------- Medien ---------- */
@@ -972,7 +908,7 @@ async function storeMedia(pr){
 async function saveToPhone(path){
   const m = await DB.get('media', path); if (!m) { toast('Datei ist noch nicht geladen'); return; }
   const ext = path.split('.').pop();
-  const file = new File([m.blob], `anke-joerg-${Date.now()}.${ext}`, { type:m.blob.type || (ext === 'jpg' ? 'image/jpeg' : 'video/mp4') });
+  const file = new File([m.blob], `denisegram-${Date.now()}.${ext}`, { type:m.blob.type || (ext === 'jpg' ? 'image/jpeg' : 'video/mp4') });
   try { if (navigator.canShare && navigator.canShare({ files:[file] })) { await navigator.share({ files:[file] }); return; } }
   catch (e) { if (e.name === 'AbortError') return; }
   const a = document.createElement('a'); a.href = URL.createObjectURL(file); a.download = file.name;
@@ -981,14 +917,19 @@ async function saveToPhone(path){
 
 /* ---------- Bausteine ---------- */
 function avatar(r, size){
-  const p = prof(r), st = `width:${size}px;height:${size}px;font-size:${Math.round(size*0.56)}px`;
+  const p = prof(r), c = colorOf(r), st = `width:${size}px;height:${size}px;font-size:${Math.round(size*0.56)}px${c && !p.avatar_path ? `;background:${c}26` : ''}`;
   if (p.avatar_path) return `<div class="av" style="${st}"><img data-media="${esc(p.avatar_path)}" alt=""></div>`;
   return `<div class="av" style="${st}">${esc(p.emoji || '🙂')}</div>`;
 }
 function ringAvatar(r){
-  const p = prof(r);
+  const p = prof(r), c = colorOf(r);
   if (p.avatar_path) return `<div class="av"><img data-media="${esc(p.avatar_path)}" alt=""></div>`;
-  return `<div class="av" style="font-size:36px">${esc(p.emoji || '🙂')}</div>`;
+  return `<div class="av" style="font-size:36px${c ? `;background:${c}26` : ''}">${esc(p.emoji || '🙂')}</div>`;
+}
+// großes Profilbild mit Lieblingsfarbe als Ring
+function bigAvatar(r, size){
+  const c = colorOf(r);
+  return `<span class="favring" style="display:inline-block;border-radius:50%;padding:3px;background:${c || 'transparent'}"><span style="display:block;border-radius:50%;padding:3px;background:var(--bg)">${avatar(r, size)}</span></span>`;
 }
 const textBox = (text, bg, cls='tp') => `<div class="${cls}" style="background:${bg || GRADS[0]}">${esc(text)}</div>`;
 function thumb(it){
@@ -997,30 +938,6 @@ function thumb(it){
 }
 const ratio = p => Math.max(0.8, Math.min(1.91, (p.w || 1) / (p.h || 1))).toFixed(3);
 
-/* ---------- Rückblicke (Woche / Monat) ---------- */
-function score(p){ return likesOf(p.id).length * 2 + commentsOf(p.id).length * 1.5 + (p.media_path ? 1 : 0) + (p.challenge ? .5 : 0); }
-function pickBest(list, n){ return list.slice().sort((a,b) => score(b) - score(a) || a.created_at - b.created_at).slice(0, n).sort((a,b) => a.created_at - b.created_at); }
-function weeklyRecaps(){
-  const cur = weekStart(Date.now()), by = new Map();
-  posts().forEach(p => { const w = weekStart(p.created_at); if (w < cur) { if (!by.has(w)) by.set(w, []); by.get(w).push(p); } });
-  return [...by.entries()].sort((a,b) => b[0] - a[0]).map(([w, list]) => ({ id:'wk' + w, kind:'week', start:w, end:addDays(w, 6), posts:pickBest(list, 4),
-    title:'Eure Woche', sub:`${dmy(w)} – ${dmy(addDays(w, 6))}` }));
-}
-function monthlyRecaps(){
-  const now = new Date(), cur = new Date(now.getFullYear(), now.getMonth(), 1).getTime(), by = new Map();
-  posts().forEach(p => { const d = new Date(p.created_at), m = new Date(d.getFullYear(), d.getMonth(), 1).getTime(); if (m < cur) { if (!by.has(m)) by.set(m, []); by.get(m).push(p); } });
-  return [...by.entries()].sort((a,b) => b[0] - a[0]).map(([m, list]) => ({ id:'mo' + m, kind:'month', start:m, posts:pickBest(list, 8),
-    title:new Date(m).toLocaleDateString('de-DE', {month:'long'}), sub:`Euer Monat ${new Date(m).getFullYear()}` }));
-}
-function recapItems(rc){
-  return [{ type:'title', title:rc.title, sub:rc.sub, bg:rc.kind === 'month' ? GRADS[2] : GRADS[0], id:rc.id }, ...rc.posts.map(p => ({ type:'post', p }))];
-}
-function storyOfUs(){
-  const w = weeklyRecaps().slice().reverse(); if (!w.length) return [];
-  let items = [{ type:'title', title:'Unsere Geschichte', sub:`${w.length} ${w.length === 1 ? 'Woche' : 'Wochen'} voller Momente`, bg:GRADS[3] }];
-  w.forEach(rc => { items = items.concat(recapItems(rc)); });
-  return items;
-}
 
 /* ---------- Ansichten ---------- */
 let rq = 0;
@@ -1029,12 +946,14 @@ function render(){
   const app = $('#app');
   if (S.onb) { app.innerHTML = onbHTML(); hydrate(app); return; }
   if (!S.me) return;
+  if (S.removed) { app.innerHTML = `<div class="step"><div class="grow" style="display:flex;flex-direction:column;justify-content:center;text-align:center"><div class="wordmark" style="font-size:52px">${esc(APP_NAME)}</div><p style="margin-top:14px"><b>Du bist nicht mehr im Inner Circle.</b></p><p class="muted">Wenn das ein Versehen war, frag nach einer neuen Einladung.</p></div></div>`; return; }
   const ae = document.activeElement, aid = ae && ae.id && app.contains(ae) ? ae.id : null;
   const sel = aid && 'selectionStart' in ae ? [ae.selectionStart, ae.selectionEnd, ae.value] : null;
   document.body.classList.toggle('dark-tab', S.tab === 'reels');
-  if (S.tab === 'chat') { renderChat(); return; }
+  if (S.tab === 'chat' && S.chatWith) { renderChat(); return; }
   let h = '';
   if (S.tab === 'home') h = homeHTML();
+  else if (S.tab === 'chat') h = inboxHTML();
   else if (S.tab === 'search') h = searchHTML();
   else if (S.tab === 'activity') h = activityHTML();
   else if (S.tab === 'profile') h = profileHTML(S.profileOf || S.me);
@@ -1044,12 +963,10 @@ function render(){
     if ($('#reels') && $('#reels').dataset.n === String(posts().filter(p => p.media_type === 'video').length)) { $$('.reel').forEach(r => updateReel(r.id.slice(2))); return; }
     h = reelsHTML();
   }
-  else if (S.tab === 'map') { if ($('#map') && LMap) return; h = mapHTML(); }
   app.innerHTML = h + tabbarHTML();
   document.body.classList.toggle('dark-tab', S.tab === 'reels');
   hydrate(app); watchVideos(); watchViews();
   if (S.tab === 'reels') { const r = $('#reels'); if (r) r.dataset.n = String(posts().filter(p => p.media_type === 'video').length); watchReels(); }
-  if (S.tab === 'map') initMap();
   if (S.tab === 'home') logoSwap();
   if (S.tab === 'activity') { S.actSeen = Date.now(); meta.set('actSeen', S.actSeen); }
   if (aid) { const n = document.getElementById(aid); if (n) { if (sel) { n.value = sel[2]; try { n.setSelectionRange(sel[0], sel[1]); } catch (_) {} } n.focus({ preventScroll:true }); } }
@@ -1062,10 +979,10 @@ function feedPosts(){
   return posts();
 }
 function homeHTML(){
-  const u = unread(), mode = S.feedMode, list = feedPosts();
+  const mode = S.feedMode, list = feedPosts();
   const newAct = activityCount();
   let empty;
-  if (mode === 'other') empty = `<div class="empty"><div class="big">👀</div><b>Noch nichts von ${esc(nick(other()))}</b>Hier erscheinen nur die Momente von ${esc(nick(other()))}.</div>`;
+  if (mode === 'other') empty = `<div class="empty"><div class="big">👀</div><b>Noch nichts von den anderen</b>Hier erscheinen die Beiträge aus deinem Inner Circle.</div>`;
   else if (mode === 'fav') empty = `<div class="empty"><div class="big">🔖</div><b>Noch keine Favoriten</b>Tipp bei einem Beitrag unten rechts auf das Lesezeichen – dann landet er hier.</div>`;
   else empty = emptyFeedHTML();
   return `<header class="topbar hometop">
@@ -1073,7 +990,7 @@ function homeHTML(){
       <button class="feedsel" data-act="feed-menu" aria-label="Feed wählen">${S.logoDone ? feedLabel() : `<span class="wordmark">${esc(APP_NAME)}</span>`}</button>
       <button class="icon-btn hbtn" data-act="tab" data-tab="activity" aria-label="Aktivität">${I.heart}${newAct ? '<span class="dot sm"></span>' : ''}</button>
     </header>
-    ${mode === 'all' ? storiesBarHTML() + quickHTML() + challengeCardHTML() : ''}
+    ${mode === 'all' ? storiesBarHTML() : ''}
     <main class="feed">${list.length ? list.map(postHTML).join('') : empty}</main>
     <div class="syncline">${syncLine()}</div>`;
 }
@@ -1085,9 +1002,7 @@ function logoSwap(){
 }
 function activityCount(){
   const seen = S.actSeen || 0;
-  let n = 0;
-  posts().forEach(p => { if (p.author === S.me) { likesOf(p.id).forEach(l => { if (l.role !== S.me && l.at > seen) n++; }); commentsOf(p.id).forEach(c => { if (c.author !== S.me && c.created_at > seen) n++; }); } });
-  return n;
+  return activityItems().filter(i => i.at > seen && i.mine).length;
 }
 function openFeedMenu(){
   closeFeedMenu();
@@ -1133,91 +1048,23 @@ function updateReel(id){
   return true;
 }
 
-/* ---------- Karte ---------- */
-let LMap = null;
-function loadLeaflet(){
-  if (window.L) return Promise.resolve();
-  return new Promise((res, rej) => {
-    const c = document.createElement('link'); c.rel = 'stylesheet'; c.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(c);
-    const j = document.createElement('script'); j.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js'; j.onload = res; j.onerror = () => rej(new Error('Karte konnte nicht geladen werden')); document.head.appendChild(j);
-  });
-}
-const lastPos = r => pings().find(g => g.from_role === r && g.lat != null);
-function mapHTML(){
-  const locs = pings().filter(g => g.lat != null).slice(0, 15);
-  return `<header class="topbar"><h1>Karte</h1></header>
-    <div id="map" class="map"></div>
-    <div class="mapbar"><button class="btn primary" data-act="ping" data-k="findme">📍 Meinen Standort an ${esc(nick(other()))} schicken</button>
-    <p class="fine" style="margin:8px 0 0;text-align:center">Ungefähr (ca. 100 m), nur wenn ihr ihn schickt – nie automatisch.</p></div>
-    ${locs.length ? `<h4 class="act-h">Zuletzt geteilt</h4>${locs.map(g => `<div class="act">${avatar(g.from_role, 40)}<p><b>${esc(nick(g.from_role))}</b> ${g.kind === 'sos' ? '🆘 Komm vorbei' : '📍 Standort'} <span class="muted">${ago(g.created_at)}</span></p><a class="link strong" href="${mapURL(g)}" target="_blank" rel="noopener">Öffnen</a></div>`).join('')}`
-      : `<div class="empty" style="padding-top:24px">Noch keine Standorte geteilt.</div>`}`;
-}
-async function initMap(){
-  const el = $('#map'); if (!el) return;
-  try { await loadLeaflet(); } catch (e) { el.innerHTML = `<div class="empty">${esc(e.message)}</div>`; return; }
-  if (!$('#map')) return;
-  if (LMap) { LMap.remove(); LMap = null; }
-  LMap = L.map('map', { zoomControl:false, attributionControl:true }).setView([51.2, 10.4], 5);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'© OpenStreetMap' }).addTo(LMap);
-  const pts = [];
-  ['je', 'anke'].forEach(r => {
-    const g = lastPos(r); if (!g) return;
-    const p = prof(r);
-    const html = `<div class="mpin">${p.avatar_path ? `<img data-media="${esc(p.avatar_path)}" alt="">` : `<span>${esc(p.emoji || '🙂')}</span>`}</div>`;
-    const icon = L.divIcon({ html, className:'mpin-wrap', iconSize:[46, 46], iconAnchor:[23, 23] });
-    L.marker([g.lat, g.lng], { icon }).addTo(LMap).bindPopup(`<b>${esc(nick(r))}</b><br>${ago(g.created_at)}`);
-    L.circle([g.lat, g.lng], { radius:Math.max(100, g.acc || 100), color:'#e8457c', weight:1, fillOpacity:.08 }).addTo(LMap);
-    pts.push([g.lat, g.lng]);
-  });
-  if (pts.length === 1) LMap.setView(pts[0], 14); else if (pts.length > 1) LMap.fitBounds(pts, { padding:[50, 50], maxZoom:15 });
-  hydrate(el);
-}
 function syncLine(){
   if (!Sync.configured || S.spaceId === 'local') return 'Nur auf diesem Gerät gespeichert';
   return Sync.status === 'verbunden' ? '● Live verbunden' : 'Offline – Änderungen werden nachgeschickt';
 }
 function emptyFeedHTML(){
-  return `<div class="empty"><div class="big">✨</div><b>Noch keine Momente</b>
-    Halte fest, was heute schön war – ein Foto, ein kurzes Video oder ein paar Worte.
-    <div style="max-width:220px;margin:18px auto 0"><button class="btn primary" data-act="create">Ersten Moment teilen</button></div></div>`;
-}
-function quickHTML(){
-  return `<div class="quick">
-    <button class="qb" data-act="ping" data-k="good"><span>😊</span><small>Gute Laune</small></button>
-    <button class="qb" data-act="ping" data-k="sad"><span>🥺</span><small>Traurig</small></button>
-    <button class="qb" data-act="sound-sheet"><span>🔔</span><small>Sound</small></button>
-    <button class="qb" data-act="ping" data-k="findme"><span>📍</span><small>Such mich</small></button>
-    <button class="qb sos" data-act="sos-ask"><span>🆘</span><small>Komm vorbei</small></button>
-  </div>`;
-}
-function challengeCardHTML(){
-  const ch = challengeFor(Date.now());
-  const list = posts().filter(p => p.challenge === ch.id);
-  const did = r => list.some(p => p.author === r);
-  const left = Math.max(0, Math.ceil((addDays(ch.week, 7) - Date.now()) / DAY));
-  const st = `${did(S.me) ? '✓ Du bist dabei' : 'Du fehlst noch'} · ${did(other()) ? `✓ ${esc(nick(other()))}` : `${esc(nick(other()))} fehlt noch`}`;
-  return `<button class="chal" data-act="challenge"><small>Challenge der Woche · noch ${left} ${left === 1 ? 'Tag' : 'Tage'}</small>
-    <b>${esc(ch.text)}</b><div class="row"><span>${st}</span><span class="go">${did(S.me) ? 'Ansehen' : 'Mitmachen'}</span></div></button>`;
+  return `<div class="empty"><div class="big">✨</div><b>Noch keine Beiträge</b>
+    Teile den ersten Moment – ein Foto, ein kurzes Video oder ein paar Worte.
+    <div style="max-width:220px;margin:18px auto 0"><button class="btn primary" data-act="create">Ersten Beitrag teilen</button></div></div>`;
 }
 function storiesBarHTML(){
-  const me = S.me, o = other(), mine = storiesOf(me, true), theirs = storiesOf(o, true);
+  const me = S.me, mine = storiesOf(me, true);
   let h = `<div class="stories">
     <button class="story" data-act="${mine.length ? 'story-user' : 'create-story'}" data-u="${me}">
       <div class="ring ${mine.length ? '' : 'none'}">${ringAvatar(me)}${mine.length ? '' : `<span class="plus">${I.plusPlain}</span>`}</div><small>Deine Story</small></button>`;
-  if (theirs.length) {
-    const seen = theirs.every(s => viewersOf(s.id).includes(me));
-    h += `<button class="story" data-act="story-user" data-u="${o}"><div class="ring ${seen ? 'seen' : ''}">${ringAvatar(o)}</div><small>${esc(nick(o))}</small></button>`;
-  } else {
-    h += `<button class="story" data-act="no-story" data-u="${o}"><div class="ring none">${ringAvatar(o)}</div><small class="muted">${esc(nick(o))}</small></button>`;
-  }
-  const lw = weeklyRecaps()[0];
-  if (lw && Date.now() < addDays(lw.end, 8)) {
-    h += `<button class="story" data-act="recap" data-id="${lw.id}"><div class="ring ${S.recapSeen.has(lw.id) ? 'seen' : ''}"><div class="av" style="font-size:30px;background:linear-gradient(135deg,#ffc15e,#ff7a59)">📖</div></div><small>Eure Woche</small></button>`;
-  }
-  const lm = monthlyRecaps()[0];
-  if (lm && Date.now() < addDays(new Date(new Date(lm.start).getFullYear(), new Date(lm.start).getMonth() + 1, 1).getTime(), 6)) {
-    h += `<button class="story" data-act="recap" data-id="${lm.id}"><div class="ring ${S.recapSeen.has(lm.id) ? 'seen' : ''}"><div class="av" style="font-size:30px;background:linear-gradient(135deg,#4facfe,#7b61ff)">🗓️</div></div><small>${esc(lm.title)}</small></button>`;
-  }
+  const withStory = others().map(o => { const st = storiesOf(o, true); return { o, st, seen:st.every(s => viewersOf(s.id).includes(me)), last:st.length ? st[st.length - 1].created_at : 0 }; })
+    .filter(x => x.st.length).sort((a,b) => (a.seen - b.seen) || (b.last - a.last));
+  withStory.forEach(x => { h += `<button class="story" data-act="story-user" data-u="${x.o}"><div class="ring ${x.seen ? 'seen' : ''}">${ringAvatar(x.o)}</div><small>${esc(uname(x.o))}</small></button>`; });
   return h + '</div>';
 }
 
@@ -1233,29 +1080,28 @@ function postHTML(p){
   } else {
     media = `<div class="media textpost" data-act="media-tap" data-id="${p.id}" style="background:${p.bg || GRADS[0]}"><p>${esc(p.text)}</p>${heart}</div>`;
   }
-  const likers = likes.map(l => l.role === S.me ? 'dir' : esc(nick(l.role)));
-  const ch = p.challenge ? CHALLENGES.find((c, i) => challengeIdFromPost(p) === i) : null;
+  const likers = likes.map(l => l.role === S.me ? 'dir' : esc(uname(l.role)));
+  const reposts = marks(p.id, 'repost'), shares = marks(p.id, 'share'), myRepost = reposts.some(r => r.role === S.me + ':repost');
+  const viewers = p.author === S.me ? marks(p.id, 'view').map(v => v.role.split(':')[0]).filter(r => r !== S.me && isActive(r)) : [];
   let cm = '';
   if (cms.length > 2) cm += `<button class="link" data-act="comments" data-id="${p.id}">Alle ${cms.length} Kommentare ansehen</button>`;
-  cm += cms.slice(-2).map(c => `<p><b>${esc(nick(c.author))}</b> ${esc(c.text)}</p>`).join('');
+  cm += cms.slice(-2).map(c => `<p><b>${esc(uname(c.author))}</b> ${esc(c.text)}</p>`).join('');
   cm += `<button class="link" data-act="comments" data-id="${p.id}">Kommentar hinzufügen …</button>`;
   return `<article class="post" id="p-${p.id}">
     <header class="ph"><button class="who" data-act="profile" data-u="${p.author}">${avatar(p.author, 38)}</button>
-      <div class="phn" data-act="profile" data-u="${p.author}"><b>${esc(nick(p.author))}</b><small>${ch ? '🎯 ' + esc(ch) : (p.author === S.me ? 'Dein Moment' : 'Für dich')}</small></div>
+      <div class="phn" data-act="profile" data-u="${p.author}"><b>${esc(uname(p.author))}</b><small>${esc(nick(p.author))}</small></div>
       <button class="icon-btn more" data-act="post-menu" data-id="${p.id}" aria-label="Mehr">${I.burger}</button></header>
     ${media}
     <div class="pa">
       <button class="icon-btn like ${liked ? 'on' : ''}" data-act="like" data-id="${p.id}" aria-label="Gefällt mir">${liked ? I.heartOn : I.heart}${likes.length ? `<span class="cnt">${likes.length}</span>` : ''}</button>
       <button class="icon-btn" data-act="comments" data-id="${p.id}" aria-label="Kommentieren">${I.comment}${cms.length ? `<span class="cnt">${cms.length}</span>` : ''}</button>
-      <button class="icon-btn ${marks(p.id, 'repost').some(r => r.role.startsWith(S.me)) ? 'rp-on' : ''}" data-act="repost" data-id="${p.id}" aria-label="In Story reposten">${I.repost}${marks(p.id, 'repost').length ? `<span class="cnt">${marks(p.id, 'repost').length}</span>` : ''}</button>
-      <button class="icon-btn" data-act="share-post" data-id="${p.id}" aria-label="Senden">${I.send}${marks(p.id, 'share').length ? `<span class="cnt">${marks(p.id, 'share').length}</span>` : ''}</button>
+      <button class="icon-btn ${myRepost ? 'rp-on' : ''}" data-act="repost" data-id="${p.id}" aria-label="In Story reposten">${I.repost}${reposts.length ? `<span class="cnt">${reposts.length}</span>` : ''}</button>
+      <button class="icon-btn" data-act="share-post" data-id="${p.id}" aria-label="Senden">${I.send}${shares.length ? `<span class="cnt">${shares.length}</span>` : ''}</button>
       <button class="icon-btn" style="margin-left:auto" data-act="fav" data-id="${p.id}" aria-label="Zu Favoriten">${isFav(p.id) ? I.saveOn : I.save}</button></div>
-    <div class="pb">${likers.length ? `<div class="likes"><span class="lav">${likes.slice(0, 2).map(l => avatar(l.role, 20).replace(/<div/g, '<span').replace(/<\/div>/g, '</span>')).join('')}</span>Gefällt <b>${likers.join('</b> und <b>')}</b></div>` : ''}
-      ${p.media_path && p.text ? `<p><b>${esc(nick(p.author))}</b> ${esc(p.text)}</p>` : ''}${cm}<p class="time">${ago(p.created_at)}${p.author === S.me && marks(p.id, 'view').length ? ` · Gesehen von ${esc(nick(other()))}` : ''}</p></div>
+    <div class="pb">${likers.length ? `<div class="likes"><span class="lav">${likes.slice(0, 2).map(l => avatar(l.role, 20).replace(/<div/g, '<span').replace(/<\/div>/g, '</span>')).join('')}</span>Gefällt <b>${nameList(likers)}</b></div>` : ''}
+      ${p.media_path && p.text ? `<p><b>${esc(uname(p.author))}</b> ${esc(p.text)}</p>` : ''}${cm}<p class="time">${ago(p.created_at)}${viewers.length ? ` · Gesehen von ${viewers.map(r => esc(uname(r))).join(', ')}` : ''}</p></div>
   </article>`;
 }
-function challengeIdFromPost(p){ return p.challenge ? challengeFor(p.created_at).id === p.challenge ? challengeFor(p.created_at).idx : chIdxById(p.challenge) : -1; }
-function chIdxById(id){ for (let w = weekStart(CH_START), i = 0; i < 520; i++, w = addDays(w, 7)) { const c = challengeFor(w); if (c.id === id) return c.idx; } return -1; }
 
 function tabbarHTML(){
   const t = S.tab, own = (t === 'profile' || t === 'ufeed') && (!S.profileOf || S.profileOf === S.me);
@@ -1275,68 +1121,59 @@ function gridHTML(list, ufeed){
   return `<div class="grid">${list.map(p => `<button class="tile" data-act="${ufeed ? 'ufeed' : 'open-post'}" data-u="${p.author}" data-id="${p.id}">${thumb(p)}${p.media_type === 'video' ? `<span class="badge">${I.video}</span>` : ''}</button>`).join('')}</div>`;
 }
 function searchHTML(){
-  return `<div class="searchbar"><input type="text" id="q" placeholder="Momente durchsuchen" value="${esc(S.q)}" autocomplete="off" enterkeyhint="search"></div>
+  return `<div class="searchbar"><input type="text" id="q" placeholder="Beiträge durchsuchen" value="${esc(S.q)}" autocomplete="off" enterkeyhint="search"></div>
     <div id="sres">${gridHTML(searchPosts())}</div>`;
 }
 function searchPosts(){
   const q = S.q.trim().toLowerCase(); if (!q) return posts();
   return posts().filter(p => (p.text || '').toLowerCase().includes(q) || commentsOf(p.id).some(c => (c.text || '').toLowerCase().includes(q)) || nick(p.author).toLowerCase().includes(q));
 }
-const PING_TXT = {
-  good:['😊','hatte gute Laune'], sad:['🥺','war traurig'], sos:['🆘','hat „Komm vorbei“ gedrückt'], findme:['📍','hat den Standort geteilt'],
-  sound:['🔔','hat dir einen Sound geschickt'], hug:['❤️','war für dich da'], coming:['🚗','war auf dem Weg'], cheer:['🎉','hat mitgefeiert']
-};
-function activityHTML(){
+function activityItems(){
   const items = [];
   posts().forEach(p => {
     if (p.author === S.me) {
-      likesOf(p.id).filter(l => l.role !== S.me).forEach(l => items.push({ at:l.at, u:l.role, txt:'gefällt dein Beitrag.', p }));
-      commentsOf(p.id).filter(c => c.author !== S.me).forEach(c => items.push({ at:c.created_at, u:c.author, txt:`hat kommentiert: ${c.text}`, p }));
-    } else items.push({ at:p.created_at, u:p.author, txt:p.challenge ? 'hat bei der Challenge mitgemacht.' : 'hat einen neuen Moment geteilt.', p });
+      likesOf(p.id).filter(l => l.role !== S.me).forEach(l => items.push({ at:l.at, u:l.role, txt:'gefällt dein Beitrag.', p, mine:true }));
+      commentsOf(p.id).filter(c => c.author !== S.me).forEach(c => items.push({ at:c.created_at, u:c.author, txt:`hat kommentiert: ${c.text}`, p, mine:true }));
+    } else items.push({ at:p.created_at, u:p.author, txt:'hat einen neuen Beitrag geteilt.', p });
   });
-  pings().filter(g => g.from_role !== S.me).slice(0, 40).forEach(g => {
-    const t = PING_TXT[g.kind] || ['🔔', g.kind];
-    items.push({ at:g.created_at, u:g.from_role, txt:`${t[1]} ${t[0]}${g.kind === 'sound' ? ' (' + soundInfo(g.sound)[2] + ')' : ''}`, g });
-  });
-  items.sort((a,b) => b.at - a.at);
-  const body = items.length ? items.slice(0, 120).map(i => `<div class="act">
+  storiesOf(S.me).forEach(s => likesOf(s.id).filter(l => l.role !== S.me).forEach(l => items.push({ at:l.at, u:l.role, txt:'gefällt deine Story.', mine:true })));
+  return items.sort((a,b) => b.at - a.at);
+}
+function activityHTML(){
+  const items = activityItems();
+  const body = items.length ? items.slice(0, 150).map(i => `<div class="act">
       <button class="who" style="background:none;border:0;padding:0" data-act="profile" data-u="${i.u}">${avatar(i.u, 44)}</button>
-      <p><b>${esc(nick(i.u))}</b> ${esc(i.txt)} <span class="muted">${ago(i.at)}</span></p>
-      ${i.p ? `<button class="thumb" data-act="open-post" data-id="${i.p.id}">${thumb(i.p)}</button>` : (i.g && i.g.lat ? `<a class="link strong" href="${mapURL(i.g)}" target="_blank" rel="noopener">Karte</a>` : '')}</div>`).join('')
-    : `<div class="empty"><div class="big">💛</div><b>Noch ruhig hier</b>Wenn ${esc(nick(other()))} etwas teilt, likt, kommentiert oder dir einen Ping schickt, siehst du es hier.</div>`;
+      <p><b>${esc(uname(i.u))}</b> ${esc(i.txt)} <span class="muted">${ago(i.at)}</span></p>
+      ${i.p ? `<button class="thumb" data-act="open-post" data-id="${i.p.id}">${thumb(i.p)}</button>` : ''}</div>`).join('')
+    : `<div class="empty"><div class="big">💛</div><b>Noch ruhig hier</b>Wenn jemand aus deinem Inner Circle etwas teilt, likt oder kommentiert, siehst du es hier.</div>`;
   return `<header class="topbar"><h1>Aktivität</h1></header>${body}`;
 }
 function profileHTML(r){
+  if (!isActive(r)) r = S.me;
   const ps = posts().filter(p => p.author === r);
   const st = storiesOf(r).slice().reverse();
-  const week = ps.filter(p => Date.now() - p.created_at < 7*DAY).length + st.filter(s => Date.now() - s.created_at < 7*DAY).length;
-  const own = r === S.me;
+  const own = r === S.me, p = prof(r);
   const head = own
-    ? `<h1>${esc(nick(r))}</h1><div class="hr"><button class="icon-btn hbtn" data-act="tab" data-tab="activity" aria-label="Aktivität">${I.heart}${activityCount() ? '<span class="dot sm"></span>' : ''}</button><button class="icon-btn" data-act="settings" aria-label="Einstellungen">${I.gear}</button></div>`
-    : `<div style="display:flex;align-items:center;gap:4px"><button class="icon-btn" data-act="tab" data-tab="home" aria-label="Zurück">${I.back}</button><h1>${esc(nick(r))}</h1></div>`;
+    ? `<h1>${esc(uname(r))}</h1><div class="hr"><button class="icon-btn hbtn" data-act="tab" data-tab="activity" aria-label="Aktivität">${I.heart}${activityCount() ? '<span class="dot sm"></span>' : ''}</button><button class="icon-btn" data-act="settings" aria-label="Menü">${I.menu}</button></div>`
+    : `<div style="display:flex;align-items:center;gap:4px"><button class="icon-btn" data-act="tab" data-tab="home" aria-label="Zurück">${I.back}</button><h1>${esc(uname(r))}</h1></div>`;
   let body;
-  if (S.profileTab === 'archive') {
+  if (S.profileTab === 'archive' && own) {
     body = st.length ? `<div class="grid">${st.map(s => `<button class="tile tall" data-act="archive-open" data-u="${r}" data-id="${s.id}">${thumb(s)}<span class="date">${shortDate(s.created_at)}</span></button>`).join('')}</div>`
       : `<div class="empty">Noch keine Stories. Jede Story landet nach 24 Stunden automatisch hier im Archiv.</div>`;
-  } else if (S.profileTab === 'recaps') {
-    const w = weeklyRecaps(), m = monthlyRecaps();
-    const row = rc => `<button class="rl" data-act="recap" data-id="${rc.id}"><div class="rt">${rc.posts[0] ? thumb(rc.posts[0]) : ''}</div><div><b>${esc(rc.kind === 'month' ? 'Monat ' + rc.title : rc.title)}</b><small>${esc(rc.sub)} · ${rc.posts.length} Momente</small></div></button>`;
-    body = (w.length || m.length) ? `<div class="rlist">
-        ${w.length > 1 ? `<button class="rl" data-act="story-of-us"><div class="rt"><div class="tp" style="background:${GRADS[3]};font-size:22px">📖</div></div><div><b>Unsere Geschichte</b><small>Alle Wochen am Stück – wird jede Woche länger</small></div></button>` : ''}
-        ${m.map(row).join('')}${w.map(row).join('')}</div>`
-      : `<div class="empty">Der erste Wochen-Rückblick erscheint automatisch am Montag – mit den schönsten Momenten der Woche.</div>`;
   } else body = ps.length ? gridHTML(ps, r) : `<div class="empty"><div class="big">📷</div><b>Noch keine Beiträge</b>${own ? 'Teile deinen ersten Moment.' : esc(nick(r)) + ' hat noch nichts geteilt.'}</div>`;
+  const hasStory = storiesOf(r, true).length > 0;
+  const pic = hasStory
+    ? `<button class="story" style="width:auto" data-act="avatar-big" data-u="${r}"><div class="ring ${r !== S.me && storiesOf(r, true).every(s => viewersOf(s.id).includes(S.me)) ? 'seen' : ''}" style="width:92px;height:92px" data-hold-avatar="${r}">${ringAvatar(r)}</div></button>`
+    : `<button class="who" style="background:none;border:0;padding:0;cursor:zoom-in" data-act="avatar-big" data-u="${r}">${bigAvatar(r, 80)}</button>`;
   return `<header class="topbar">${head}</header>
-    <section class="prof">${storiesOf(r, true).length ? `<button class="story" style="width:auto" data-act="avatar-big" data-u="${r}"><div class="ring ${r !== S.me && storiesOf(r, true).every(s => viewersOf(s.id).includes(S.me)) ? 'seen' : ''}" style="width:92px;height:92px" data-hold-avatar="${r}">${ringAvatar(r)}</div></button>` : `<button class="who" style="background:none;border:0;padding:0;cursor:zoom-in" data-act="avatar-big" data-u="${r}">${avatar(r, 86)}</button>`}
-      <div class="stats"><div><b>${ps.length}</b><span>Beiträge</span></div><div><b>${st.length}</b><span>Stories</span></div><div><b>${week}</b><span>diese Woche</span></div></div></section>
-    <div class="pname"><b>${esc(nick(r))}${prof(r).pronouns ? ` <span class="muted" style="font-weight:400">${esc(prof(r).pronouns)}</span>` : ''}</b>${prof(r).bio ? `<p class="bio">${esc(prof(r).bio)}</p>` : ''}${safeLink(prof(r).link) ? `<a class="plink" href="${esc(safeLink(prof(r).link))}" target="_blank" rel="noopener">🔗 ${esc(safeLink(prof(r).link).replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))}</a>` : ''}<span class="muted">Lieblingston: ${soundInfo(prof(r).sound)[1]} ${soundInfo(prof(r).sound)[2]}</span></div>
-    ${own ? `<div class="pact"><button class="btn" data-act="edit-profile">Profil bearbeiten</button><button class="btn" data-act="create-story">Story hinzufügen</button></div>` : `<div class="pact"><button class="btn" data-act="tab" data-tab="chat">Nachricht</button></div>`}
-    <div class="ptabs"><button class="${S.profileTab === 'grid' ? 'on' : ''}" data-act="ptab" data-t="grid" aria-label="Beiträge">${I.grid}</button>
-      <button class="${S.profileTab === 'archive' ? 'on' : ''}" data-act="ptab" data-t="archive" aria-label="Story-Archiv">${I.archive}</button>
-      <button class="${S.profileTab === 'recaps' ? 'on' : ''}" data-act="ptab" data-t="recaps" aria-label="Rückblicke">${I.book}</button></div>
+    <section class="prof">${pic}
+      <div class="stats"><div><b>${ps.length}</b><span>Beiträge</span></div><div><b>${st.length}</b><span>Stories</span></div><div><b>${activePids().length || 1}</b><span>Inner Circle</span></div></div></section>
+    <div class="pname"><b>${esc(nick(r))}${p.pronouns ? ` <span class="muted" style="font-weight:400">${esc(p.pronouns)}</span>` : ''}</b>${p.bio ? `<p class="bio">${esc(p.bio)}</p>` : ''}${safeLink(p.link) ? `<a class="plink" href="${esc(safeLink(p.link))}" target="_blank" rel="noopener">🔗 ${esc(safeLink(p.link).replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))}</a>` : ''}</div>
+    ${own ? `<div class="pact"><button class="btn" data-act="edit-profile">Profil bearbeiten</button><button class="btn" data-act="create-story">Story hinzufügen</button></div>` : `<div class="pact"><button class="btn" data-act="chat-with" data-u="${r}">Nachricht</button></div>`}
+    <div class="ptabs"><button class="${S.profileTab !== 'archive' || !own ? 'on' : ''}" data-act="ptab" data-t="grid" aria-label="Beiträge">${I.grid}</button>
+      ${own ? `<button class="${S.profileTab === 'archive' ? 'on' : ''}" data-act="ptab" data-t="archive" aria-label="Story-Archiv">${I.archive}</button>` : ''}</div>
     ${body}`;
 }
-
 function ufeedHTML(r){
   const ps = posts().filter(p => p.author === r);
   return `<header class="topbar" style="justify-content:flex-start;gap:6px"><button class="icon-btn" data-act="profile" data-u="${r}" aria-label="Zurück">${I.back}</button>
@@ -1344,30 +1181,38 @@ function ufeedHTML(r){
     <main class="feed">${ps.map(postHTML).join('')}</main>`;
 }
 
-/* ---------- Chat ---------- */
+/* ---------- Direktnachrichten (1:1) ---------- */
+function inboxHTML(){
+  const list = others().map(o => { const ms = chatMsgs(o); const last = ms[ms.length - 1]; return { o, last, n:unreadFrom(o) }; })
+    .sort((a,b) => ((b.last ? b.last.created_at : 0) - (a.last ? a.last.created_at : 0)) || nick(a.o).localeCompare(nick(b.o)));
+  const rows = list.length ? list.map(x => `<button class="act inbox-row" data-act="chat-with" data-u="${x.o}" style="width:100%;background:none;border:0;text-align:left;cursor:pointer">
+      ${avatar(x.o, 52)}<p><b>${esc(nick(x.o))}</b><br><span class="${x.n ? '' : 'muted'}" style="${x.n ? 'font-weight:600' : ''}">${x.last ? esc((x.last.author === S.me ? 'Du: ' : '') + msgText(x.last.text).slice(0, 48)) + ' · ' + ago(x.last.created_at) : 'Noch keine Nachrichten'}</span></p>
+      ${x.n ? `<span class="dot" style="position:static">${x.n}</span>` : ''}</button>`).join('')
+    : `<div class="empty"><div class="big">💬</div><b>Noch niemand da</b>Sobald jemand deinem Inner Circle beitritt, könnt ihr euch hier schreiben.</div>`;
+  return `<header class="topbar"><h1>${esc(uname(S.me))}</h1></header><h4 class="act-h">Nachrichten</h4>${rows}`;
+}
 function renderChat(){
-  const app = $('#app');
-  if (!$('#clog')) {
-    const o = other();
-    app.innerHTML = `<div class="chat"><header class="topbar"><button class="icon-btn" data-act="tab" data-tab="home" aria-label="Zurück">${I.back}</button>
-      <button class="who" style="background:none;border:0;padding:0;display:flex;align-items:center;gap:10px;cursor:pointer" data-act="profile" data-u="${o}">${avatar(o, 32)}<h1>${esc(nick(o))}</h1></button><button class="icon-btn" style="margin-left:auto" data-act="tab" data-tab="map" aria-label="Karte">${I.pin}</button></header><div class="clog" id="clog"></div>
-      <form class="cbar" id="cbar"><button class="icon-btn" type="button" data-act="sound-sheet" aria-label="Sound schicken">${I.bell}</button>
-      <input type="text" id="cmsg" placeholder="Nachricht …" autocomplete="off" enterkeyhint="send" maxlength="2000">
+  const app = $('#app'), o = S.chatWith;
+  if (!isActive(o)) { S.chatWith = null; render(); return; }
+  if (!$('#clog') || $('#clog').dataset.u !== o) {
+    app.innerHTML = `<div class="chat"><header class="topbar"><button class="icon-btn" data-act="inbox" aria-label="Zurück">${I.back}</button>
+      <button class="who" style="background:none;border:0;padding:0;display:flex;align-items:center;gap:10px;cursor:pointer" data-act="profile" data-u="${o}">${avatar(o, 32)}<h1>${esc(nick(o))}</h1></button></header><div class="clog" id="clog" data-u="${o}"></div>
+      <form class="cbar" id="cbar"><input type="text" id="cmsg" placeholder="Nachricht …" autocomplete="off" enterkeyhint="send" maxlength="2000">
       <button class="link strong" type="submit">Senden</button></form></div>`;
     hydrate(app);
   }
-  const ms = messages(); const log = $('#clog');
+  const ms = chatMsgs(o); const log = $('#clog');
   let h = '', lastDay = '';
   ms.forEach(m => {
     const dl = dayLabel(m.created_at);
     if (dl !== lastDay) { h += `<div class="daysep">${esc(dl)}</div>`; lastDay = dl; }
     const pm = /^\[\[post:([\w-]+)\]\]$/.exec(m.text || ''), sp = pm && D.posts.get(pm[1]);
-    if (pm) h += `<button class="bub pcard ${m.author === S.me ? 'me' : 'them'}" data-act="open-post" data-id="${pm[1]}">${sp && !sp.deleted ? `<div class="pc-th">${thumb(sp)}</div><b>${esc(nick(sp.author))}</b><span>${esc((sp.text || '').slice(0, 60))}</span>` : '<span>Beitrag nicht mehr da</span>'}<time>${hhmm(m.created_at)}</time></button>`;
+    if (pm) h += `<button class="bub pcard ${m.author === S.me ? 'me' : 'them'}" data-act="open-post" data-id="${pm[1]}">${sp && !sp.deleted ? `<div class="pc-th">${thumb(sp)}</div><b>${esc(uname(sp.author))}</b><span>${esc((sp.text || '').slice(0, 60))}</span>` : '<span>Beitrag nicht mehr da</span>'}<time>${hhmm(m.created_at)}</time></button>`;
     else h += `<div class="bub ${m.author === S.me ? 'me' : 'them'}">${esc(m.text)}<time>${hhmm(m.created_at)}</time></div>`;
   });
   const lastMine = [...ms].reverse().find(m => m.author === S.me);
-  if (lastMine && ms[ms.length - 1] === lastMine) h += `<div class="rd">${lastMine.read_at ? 'Gelesen ' + hhmm(lastMine.read_at) : 'Gesendet'}</div>`;
-  if (!ms.length) h = `<div class="empty">Schreib ${esc(nick(other()))} die erste Nachricht 💬</div>`;
+  if (lastMine && ms[ms.length - 1] === lastMine) h += `<div class="rd">${lastMine.read_at ? 'Gesehen ' + hhmm(lastMine.read_at) : 'Gesendet'}</div>`;
+  if (!ms.length) h = `<div class="empty">Schreib ${esc(nick(o))} die erste Nachricht 💬</div>`;
   const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 80;
   log.innerHTML = h; hydrate(log);
   if (!ms.length) window.scrollTo(0, 0);
@@ -1375,79 +1220,17 @@ function renderChat(){
   markRead();
 }
 async function markRead(){
-  if (document.visibilityState !== 'visible' || S.tab !== 'chat') return;
+  if (document.visibilityState !== 'visible' || S.tab !== 'chat' || !S.chatWith) return;
   const now = Date.now();
-  for (const m of messages().filter(m => m.author !== S.me && !m.read_at)) await put('messages', { ...m, read_at:now });
+  for (const m of chatMsgs(S.chatWith).filter(m => m.author === S.chatWith && !m.read_at)) await patch('messages', m, { read_at:now });
 }
-async function sendMessage(text){
-  text = text.trim(); if (!text) return;
-  await put('messages', { id:newId(), author:S.me, text, created_at:Date.now(), read_at:null, deleted:false });
-  renderChat(); window.scrollTo(0, document.body.scrollHeight);
-  Sync.push('message', nick(S.me), text.slice(0, 140));
+async function sendMessage(text, to){
+  text = text.trim(); to = to || S.chatWith; if (!text || !to) return;
+  await put('messages', { id:newId(), author:S.me, to_pid:to, text, created_at:Date.now(), read_at:null, deleted:false });
+  if (S.tab === 'chat' && S.chatWith === to) { renderChat(); window.scrollTo(0, document.body.scrollHeight); }
+  Sync.push('message', nick(S.me), msgText(text).slice(0, 140), to);
 }
-
-/* ---------- Pings: Stimmung, Sounds, Notfall ---------- */
-const mapURL = g => `https://www.google.com/maps/search/?api=1&query=${g.lat},${g.lng}`;
-function getPos(){
-  return new Promise(res => {
-    if (!navigator.geolocation) return res(null);
-    navigator.geolocation.getCurrentPosition(p => res({ lat:+p.coords.latitude.toFixed(3), lng:+p.coords.longitude.toFixed(3), acc:Math.round(p.coords.accuracy) }),
-      () => res(null), { enableHighAccuracy:false, timeout:12000, maximumAge:120000 });
-  });
-}
-const PUSH_TXT = {
-  good:   n => [`${n} hat gute Laune 😊`, 'Feier mit!'],
-  sad:    n => [`${n} ist traurig 🥺`, 'Nicht fragen – einfach da sein. ❤️'],
-  sos:    n => [`🆘 ${n}: Komm vorbei!`, 'Bitte melde dich – Standort in der App.'],
-  findme: n => [`📍 ${n} teilt den Standort`, 'Ungefähre Position in der App ansehen.'],
-  hug:    n => [`❤️ ${n} ist für dich da`, ''],
-  coming: n => [`🚗 ${n} ist auf dem Weg!`, ''],
-  cheer:  n => [`🎉 ${n} feiert mit!`, '']
-};
-async function sendPing(kind, extra={}){
-  let pos = null;
-  if (kind === 'sos' || kind === 'findme') { toast('Standort wird ermittelt …'); pos = await getPos(); if (!pos) toast('Ohne Standort gesendet (nicht erlaubt oder nicht gefunden)'); }
-  const row = { id:newId(), from_role:S.me, kind, sound:extra.sound || null, lat:pos ? pos.lat : null, lng:pos ? pos.lng : null, acc:pos ? pos.acc : null, created_at:Date.now() };
-  await put('pings', row);
-  const n = nick(S.me);
-  if (kind === 'sound') { const si = soundInfo(extra.sound); Sync.push('sound', `${si[1]} ${n} schickt dir: ${si[2]}`, 'Tippen zum Öffnen'); }
-  else { const t = (PUSH_TXT[kind] || (x => [x, '']))(n); Sync.push(kind, t[0], t[1], kind === 'sos'); }
-  const conf = { good:'Gute Laune verschickt 😊', sad:`${nick(other())} weiß Bescheid ❤️`, sos:'Notruf ist raus 🆘', findme:'Standort geteilt 📍', sound:'Sound verschickt 🔔', hug:'❤️ angekommen', coming:'Bescheid gegeben 🚗', cheer:'🎉 verschickt' };
-  toast(conf[kind] || 'Gesendet');
-  if (!Sync.ready) setTimeout(() => toast(Sync.configured ? 'Kommt an, sobald wieder Netz da ist' : 'Hinweis: Ohne Supabase nur auf diesem Gerät'), 2900);
-}
-let alarmLoop;
-function showPingAlert(g){
-  $$('.alert').forEach(a => a.remove()); clearInterval(alarmLoop);
-  const n = esc(nick(g.from_role)), fav = prof(g.from_role).sound || 'glocke';
-  const map = g.lat ? `<a class="btn maplink" href="${mapURL(g)}" target="_blank" rel="noopener">📍 Auf der Karte ansehen (ca. ${g.acc ? Math.max(100, g.acc) : 100} m)</a>` : '';
-  let big, title, txt, btns, cls = '';
-  switch (g.kind) {
-    case 'good': big = '😊'; title = `${n} hat gute Laune!`; txt = 'Feier mit!'; btns = `<button class="btn primary" data-act="reply" data-k="cheer">🎉 Mitfeiern</button>`; Sound.play(fav); break;
-    case 'sad': big = '🥺'; title = `${n} ist traurig`; txt = 'Jetzt nicht fragen. Einfach da sein.'; btns = `<button class="btn primary" data-act="reply" data-k="hug">❤️ Ich bin da</button><button class="btn" data-act="reply-chat">Nachricht schreiben</button>`; Sound.play('herz'); break;
-    case 'sos': cls = 'sos'; big = '🆘'; title = `${n}: Komm vorbei!`; txt = g.lat ? 'Ungefährer Standort:' : 'Kein Standort mitgeschickt.'; btns = `<button class="btn" data-act="reply" data-k="coming">🚗 Ich komme!</button><button class="btn ghost" data-act="reply-chat">Nachricht schreiben</button>`;
-      Sound.play('alarm'); let k = 0; alarmLoop = setInterval(() => { if (++k > 3) clearInterval(alarmLoop); else Sound.play('alarm'); }, 2700); break;
-    case 'findme': big = '📍'; title = `Hier ist ${n} ungefähr`; txt = g.lat ? '' : 'Der Standort konnte nicht ermittelt werden.'; btns = ''; Sound.play(fav); break;
-    case 'sound': { const si = soundInfo(g.sound); big = si[1]; title = `${n} schickt dir: ${si[2]}`; txt = ''; btns = `<button class="btn" data-act="replay" data-s="${si[0]}">Nochmal abspielen</button>`; Sound.play(si[0]); break; }
-    case 'hug': big = '❤️'; title = `${n} ist für dich da`; txt = ''; btns = ''; Sound.play(fav); break;
-    case 'coming': big = '🚗'; title = `${n} ist auf dem Weg!`; txt = ''; btns = ''; Sound.play(fav); break;
-    case 'cheer': big = '🎉'; title = `${n} feiert mit!`; txt = ''; btns = ''; Sound.play('fanfare'); break;
-    default: return;
-  }
-  const el = document.createElement('div'); el.className = 'alert ' + cls;
-  el.innerHTML = `<div class="card"><div class="big ${g.kind === 'sos' ? 'pulse' : ''}">${big}</div><h2>${title}</h2>${txt ? `<p>${txt}</p>` : '<p></p>'}${map}${btns}<button class="btn ${cls ? 'ghost' : ''}" data-act="alert-close" style="margin-top:8px">Schließen</button></div>`;
-  document.body.appendChild(el);
-  if (navigator.vibrate) navigator.vibrate(g.kind === 'sos' ? [600,200,600,200,600] : [150]);
-}
-function closeAlert(){ $$('.alert').forEach(a => a.remove()); clearInterval(alarmLoop); }
-function openSoundSheet(){
-  let selected = prof(S.me).sound || 'glocke';
-  openSheet(`<h3 class="sh-title">Sound an ${esc(nick(other()))} schicken</h3>
-    <div class="sounds">${SOUND_LIST.filter(s => s[0] !== 'alarm').map(s => `<button data-act="sound-pick" data-s="${s[0]}" class="${s[0] === selected ? 'on' : ''}"><span>${s[1]}</span><small>${s[2]}</small></button>`).join('')}</div>
-    <button class="btn primary" data-act="sound-send" id="ssend">${soundInfo(selected)[1]} ${soundInfo(selected)[2]} schicken</button>
-    <p class="fine" style="text-align:center;margin-top:10px">Antippen = Vorhören. Bei offener App spielt der Sound sofort, sonst kommt eine Benachrichtigung.</p>`);
-  $('#ssend').dataset.s = selected;
-}
+function openChat(pid){ closeSheet(); S.tab = 'chat'; S.chatWith = pid; $('#app').innerHTML = ''; render(); }
 
 /* ---------- Sheets ---------- */
 function openSheet(html, cls=''){
@@ -1461,17 +1244,15 @@ function openSheet(html, cls=''){
 function closeSheet(){ $$('.backdrop').forEach(b => b.remove()); }
 
 /* ---------- Erstellen ---------- */
-const C = { mode:'post', pr:null, previewURL:null, bg:GRADS[0], challenge:null };
-function openCreate(mode, challenge){
-  C.mode = mode || 'post'; C.pr = null; C.bg = GRADS[0]; C.challenge = challenge || null;
+const C = { mode:'post', pr:null, previewURL:null, bg:GRADS[0] };
+function openCreate(mode){
+  C.mode = mode || 'post'; C.pr = null; C.bg = GRADS[0];
   if (C.previewURL) { URL.revokeObjectURL(C.previewURL); C.previewURL = null; }
-  const ch = challengeFor(Date.now());
   openSheet(`<div class="seg"><button data-act="cmode" data-m="post" class="${C.mode === 'post' ? 'on' : ''}">Beitrag</button><button data-act="cmode" data-m="story" class="${C.mode === 'story' ? 'on' : ''}">Story</button></div>
-    ${C.mode === 'post' ? `<label style="display:flex;gap:8px;align-items:center;margin:0 0 10px;font-size:13px"><input type="checkbox" id="cchal" ${C.challenge ? 'checked' : ''}> 🎯 Zur Challenge: <b>${esc(ch.text)}</b></label>` : ''}
     <div class="cprev" id="cprev"></div>
     <div class="pick"><label class="btn">Foto / Video<input type="file" id="cfile" accept="image/*,video/*" hidden></label>
       <label class="btn">Kamera<input type="file" id="ccam" accept="image/*,video/*" capture="environment" hidden></label></div>
-    <textarea id="ctext" rows="3" maxlength="2200" placeholder="${C.challenge ? esc(ch.text) + ' …' : 'Was war gerade schön?'}"></textarea>
+    <textarea id="ctext" rows="3" maxlength="2200" placeholder="Was gibt’s Neues?"></textarea>
     <div class="grads" id="cgrads">${GRADS.map((g,i) => `<button data-act="cbg" data-i="${i}" class="${i === 0 ? 'on' : ''}" style="background:${g}" aria-label="Hintergrund ${i+1}"></button>`).join('')}</div>
     <button class="btn primary" data-act="publish" id="cpub">Teilen</button>
     <p class="fine" id="chint" style="text-align:center;margin:10px 0 0"></p>`, 'tall');
@@ -1483,9 +1264,9 @@ function updatePreview(){
   const text = ($('#ctext') || {}).value || '';
   box.innerHTML = C.pr
     ? (C.pr.type === 'video' ? `<video src="${C.previewURL}" muted playsinline autoplay loop></video>` : `<img src="${C.previewURL}" alt="">`) + `<button class="icon-btn x" data-act="cclear" aria-label="Entfernen">${I.close}</button>`
-    : `<div class="tp" style="background:${C.bg}">${esc(text || (C.mode === 'story' ? 'Deine Story …' : 'Dein Moment …'))}</div>`;
+    : `<div class="tp" style="background:${C.bg}">${esc(text || (C.mode === 'story' ? 'Deine Story …' : 'Dein Beitrag …'))}</div>`;
   const g = $('#cgrads'); if (g) g.style.display = C.pr ? 'none' : 'flex';
-  const hint = $('#chint'); if (hint) hint.textContent = C.mode === 'story' ? 'Die Story ist 24 Stunden im Ring zu sehen und bleibt danach im Archiv.' : 'Der Moment erscheint bei euch beiden im Feed.';
+  const hint = $('#chint'); if (hint) hint.textContent = C.mode === 'story' ? 'Die Story ist 24 Stunden im Ring zu sehen und bleibt danach im Archiv.' : 'Der Beitrag erscheint bei allen im Inner Circle.';
 }
 async function onPickFile(input){
   const f = input.files && input.files[0]; if (!f) return;
@@ -1499,16 +1280,14 @@ async function publish(){
   const text = ($('#ctext').value || '').trim();
   if (!C.pr && !text) { toast('Wähle ein Foto/Video oder schreib ein paar Worte.'); return; }
   const pub = $('#cpub'); pub.disabled = true; pub.textContent = 'Wird geteilt …';
-  const chk = $('#cchal');
   const base = { id:newId(), author:S.me, created_at:Date.now(), text, media_path:null, media_type:null, w:0, h:0, d:0, bg:C.pr ? null : C.bg, deleted:false };
   if (C.pr) { base.media_path = await storeMedia(C.pr); base.media_type = C.pr.type; base.w = C.pr.w; base.h = C.pr.h; base.d = C.pr.d || 0; }
   if (C.mode === 'story') {
     await put('stories', base); closeSheet(); S.tab = 'home'; render(); toast('Story geteilt');
-    Sync.push('story', `${nick(S.me)} hat eine Story geteilt ⭕`, text.slice(0, 120));
+    Sync.push('story', `${uname(S.me)} hat eine Story geteilt ⭕`, text.slice(0, 120), 'all');
   } else {
-    base.challenge = chk && chk.checked ? challengeFor(Date.now()).id : null;
-    await put('posts', base); closeSheet(); S.tab = 'home'; render(); window.scrollTo({ top:0 }); toast('Moment geteilt');
-    Sync.push('post', `${nick(S.me)} hat einen Moment geteilt ✨`, text.slice(0, 120));
+    await put('posts', base); closeSheet(); S.tab = 'home'; render(); window.scrollTo({ top:0 }); toast('Beitrag geteilt');
+    Sync.push('post', `${uname(S.me)} hat einen Beitrag geteilt ✨`, text.slice(0, 120), 'all');
   }
 }
 
@@ -1525,23 +1304,34 @@ async function setLike(id, mode){
   const p = D.posts.get(id); if (!p) return;
   const cur = D.reactions.get(id + '|' + S.me), on = cur && cur.on;
   if (on && mode === 'toggle') await put('reactions', { post_id:id, role:S.me, at:cur.at, on:false });
-  else if (!on) await put('reactions', { post_id:id, role:S.me, at:Date.now(), on:true });
+  else if (!on) { await put('reactions', { post_id:id, role:S.me, at:Date.now(), on:true }); if (p.author !== S.me) Sync.push('like', `${uname(S.me)} gefällt dein Beitrag ❤️`, (p.text || '').slice(0, 80), p.author); }
   if (S.tab === 'reels' && updateReel(id)) { if (mode === 'on') { const h = $('#r-' + id + ' .bigheart'); h.classList.remove('pop'); void h.offsetWidth; h.classList.add('pop'); } return; }
   refreshPost(p, mode === 'on');
 }
 async function repostPost(id){
   const p = D.posts.get(id); if (!p) return;
-  const by = p.author === S.me ? '' : `↻ ${nick(p.author)}: `;
+  const by = p.author === S.me ? '' : `↻ ${uname(p.author)}: `;
   await put('stories', { id:newId(), author:S.me, created_at:Date.now(), text:(by + (p.text || '')).trim(), media_path:p.media_path, media_type:p.media_type, w:p.w, h:p.h, d:p.d || 0, bg:p.bg || GRADS[0], deleted:false });
   await put('reactions', { post_id:id, role:S.me + ':repost', at:Date.now(), on:true });
   toast('In deiner Story geteilt ↻'); refreshPost(p);
+  Sync.push('story', `${uname(S.me)} hat eine Story geteilt ⭕`, '', 'all');
 }
-async function sharePost(id){
-  const p = D.posts.get(id); if (!p) return;
-  await put('messages', { id:newId(), author:S.me, text:`[[post:${id}]]`, created_at:Date.now(), read_at:null, deleted:false });
-  await put('reactions', { post_id:id, role:S.me + ':share', at:Date.now(), on:true });
-  Sync.push('message', nick(S.me), '📎 hat dir einen Beitrag geschickt');
-  toast(`An ${nick(other())} geschickt ✈`); refreshPost(p);
+const SEND = { id:null, sel:new Set() };
+function openSendPicker(id){
+  SEND.id = id; SEND.sel = new Set();
+  const os = others();
+  if (!os.length) { toast('Noch niemand im Inner Circle'); return; }
+  openSheet(`<h3 class="sh-title">Senden an …</h3><div class="clist" style="max-height:50vh">${os.map(o => `<button class="act sendpick" data-act="send-pick" data-u="${o}" style="width:100%;background:none;border:0;text-align:left;cursor:pointer">${avatar(o, 40)}<p><b>${esc(nick(o))}</b><br><span class="muted">${esc(uname(o))}</span></p><span class="pk" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:inline-flex;align-items:center;justify-content:center"></span></button>`).join('')}</div>
+    <button class="btn primary" data-act="send-go" id="sendgo" disabled>Senden</button>`, 'tall');
+}
+async function sendPostTo(){
+  const p = D.posts.get(SEND.id); if (!p || !SEND.sel.size) return;
+  for (const to of SEND.sel) {
+    await put('messages', { id:newId(), author:S.me, to_pid:to, text:`[[post:${p.id}]]`, created_at:Date.now(), read_at:null, deleted:false });
+    Sync.push('message', nick(S.me), '📎 hat dir einen Beitrag geschickt', to);
+  }
+  await put('reactions', { post_id:p.id, role:S.me + ':share', at:Date.now(), on:true });
+  closeSheet(); toast(SEND.sel.size === 1 ? `An ${nick([...SEND.sel][0])} geschickt ✈` : `An ${SEND.sel.size} Personen geschickt ✈`); refreshPost(p);
 }
 let viewObs; const viewT = {};
 function watchViews(){
@@ -1590,7 +1380,7 @@ async function addComment(id, text){
   const p = D.posts.get(id); if (!p || !text.trim()) return;
   await put('comments', { id:newId(), post_id:id, author:S.me, text:text.trim(), created_at:Date.now(), deleted:false });
   openComments(id); if (S.tab === 'home') refreshPost(p);
-  if (p.author !== S.me) Sync.push('comment', `${nick(S.me)} hat kommentiert`, text.trim().slice(0, 120));
+  if (p.author !== S.me) Sync.push('comment', `${uname(S.me)} hat kommentiert`, text.trim().slice(0, 120), p.author);
 }
 function postMenu(id){
   const p = D.posts.get(id); if (!p) return;
@@ -1600,7 +1390,7 @@ function postMenu(id){
     <button class="btn" data-act="close-sheet">Abbrechen</button></div>`);
 }
 function delPostAsk(id){
-  openSheet(`<h3 class="sh-title">Beitrag löschen?</h3><p class="muted" style="text-align:center;margin:0 0 14px">Der Moment ist danach weg – auch bei ${esc(nick(other()))}.</p>
+  openSheet(`<h3 class="sh-title">Beitrag löschen?</h3><p class="muted" style="text-align:center;margin:0 0 14px">Der Beitrag ist danach für alle weg.</p>
     <div class="menu"><button class="btn danger" data-act="del-post" data-id="${id}">Löschen</button><button class="btn" data-act="close-sheet">Behalten</button></div>`);
 }
 async function delPost(id){
@@ -1610,22 +1400,8 @@ async function delPost(id){
   closeSheet(); render(); toast('Gelöscht');
 }
 function openSinglePost(id){ const p = D.posts.get(id); if (p) openSheet(`<div style="margin:0 -16px">${postHTML(p)}</div>`, 'tall'); }
-function openChallenge(){
-  const ch = challengeFor(Date.now());
-  const cur = posts().filter(p => p.challenge === ch.id);
-  const past = [];
-  for (let w = addDays(ch.week, -7), i = 0; w >= weekStart(CH_START) && i < 60; w = addDays(w, -7), i++) {
-    const c = challengeFor(w); const list = posts().filter(p => p.challenge === c.id); past.push({ c, list });
-  }
-  openSheet(`<h3 class="sh-title">🎯 Challenge der Woche</h3>
-    <p style="text-align:center;font-size:19px;font-weight:700;margin:0 0 6px">${esc(ch.text)}</p>
-    <p class="fine" style="text-align:center;margin:0 0 12px">Ein Foto oder kurzes Video dazu – jede Woche ein neues Thema.</p>
-    <button class="btn primary" data-act="challenge-go">Mitmachen</button>
-    <div style="margin:14px -16px 0">${cur.length ? gridHTML(cur) : ''}</div>
-    ${past.length ? `<h4 style="margin:18px 0 6px">Frühere Challenges</h4>${past.map(x => `<p style="margin:6px 0"><b>${esc(x.c.text)}</b> <span class="muted">· ab ${dmy(x.c.week)} · ${x.list.length} ${x.list.length === 1 ? 'Moment' : 'Momente'}</span></p>`).join('')}` : ''}`, 'tall');
-}
 
-/* ---------- Story-Ansicht (auch für Rückblicke) ---------- */
+/* ---------- Story-Ansicht ---------- */
 const V = { list:[], i:0, raf:0, last:0, elapsed:0, dur:5000, paused:false, downAt:0, ready:true };
 function openViewer(items, i){
   if (!items.length) return;
@@ -1666,7 +1442,6 @@ function showItem(){
   }
   wrap.innerHTML = `${body}${foot}<div class="vtap l" data-act="vprev"></div><div class="vtap r" data-act="vnext"></div><div class="vtop">${bars}${head}</div>`;
   hydrate(wrap);
-  if (it.type === 'title' && it.id) { S.recapSeen.add(it.id); meta.set('recapSeen', [...S.recapSeen]); }
   V.elapsed = 0; V.last = 0; V.dur = it.type === 'title' ? 3500 : 5000; V.ready = true;
   const v = $('video', wrap);
   if (v) {
@@ -1690,22 +1465,28 @@ function nextItem(){ if (V.i < V.list.length - 1) { V.i++; showItem(); } else cl
 function prevItem(){ if (V.i > 0) V.i--; showItem(); }
 function closeViewer(){ cancelAnimationFrame(V.raf); const el = $('#viewer'); if (el) el.remove(); document.body.style.overflow = ''; render(); }
 
-/* ---------- Profil-Formular (Onboarding + Bearbeiten) ---------- */
-const E = { role:null, emoji:null, sound:null, avatarPr:null, avatarURL:null, removePhoto:false };
-function profileFormHTML(r){
-  const p = prof(r), fixed = USERS[r].fixedNick;
-  E.role = r; E.emoji = p.emoji || USERS[r].emoji; E.sound = p.sound || USERS[r].sound; E.avatarPr = null; E.removePhoto = false;
+
+/* ---------- Profil-Formular (Einrichtung + Bearbeiten) ---------- */
+const E = { emoji:null, color:'', avatarPr:null, avatarURL:null, removePhoto:false, unameTouched:false };
+function colorPickHTML(){
+  return `<div class="colors" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">${COLORS.map(c => `<button type="button" data-act="e-color" data-c="${c}" aria-label="Farbe ${c}" style="width:32px;height:32px;border-radius:50%;border:${E.color === c ? '3px solid var(--fg)' : '2px solid var(--line)'};background:${c};padding:0"></button>`).join('')}
+    <label style="display:inline-flex;align-items:center;gap:6px;font-size:13px" class="muted">eigene <input type="color" id="ecolor" value="${E.color || '#e8457c'}" style="width:36px;height:32px;border:0;padding:0;background:none"></label></div>`;
+}
+function profileFormHTML(){
+  const p = prof(S.me || '');
+  E.emoji = p.emoji || '🙂'; E.color = p.color || ''; E.avatarPr = null; E.removePhoto = false; E.unameTouched = !!p.username;
   if (E.avatarURL) { URL.revokeObjectURL(E.avatarURL); E.avatarURL = null; }
-  return `<div style="display:flex;justify-content:center;margin:6px 0 10px" id="eav">${avatar(r, 86)}</div>
-    <div class="pick"><label class="btn">Foto als Profilbild<input type="file" id="efile" accept="image/*" hidden></label>
-      ${p.avatar_path ? '<button class="btn" data-act="e-nophoto">Foto entfernen</button>' : ''}</div>
-    <label class="fl" for="enick">Spitzname</label>
-    <input type="text" id="enick" value="${esc(nick(r))}" maxlength="24" ${fixed ? 'readonly' : ''} autocomplete="off">
-    <p class="fine" style="margin:6px 0 0">${fixed ? 'Fest eingestellt.' : 'So siehst du für den anderen aus.'}</p>
+  return `<div style="display:flex;justify-content:center;margin:6px 0 10px" id="eav"><div class="av" style="width:86px;height:86px;font-size:48px">${esc(E.emoji)}</div></div>
+    <div class="pick"><label class="btn">Foto als Profilbild<input type="file" id="efile" accept="image/*" hidden></label></div>
+    <label class="fl" for="enick">Name</label>
+    <input type="text" id="enick" value="${esc(p.nick && p.nick !== 'Mitglied' ? p.nick : '')}" maxlength="24" placeholder="z. B. Denise" autocomplete="off">
+    <label class="fl" for="euname">Benutzername</label>
+    <input type="text" id="euname" value="${esc(p.username || '')}" maxlength="24" placeholder="z. B. denise" autocomplete="off" autocapitalize="none" spellcheck="false">
+    <p class="fine" style="margin:6px 0 0">Kleinbuchstaben, Zahlen, Punkt und Unterstrich.</p>
     <label class="fl">Oder ein Emoji als Bild</label>
     <div class="emojis">${EMOJIS.map(e => `<button data-act="e-emoji" data-e="${e}" class="${e === E.emoji ? 'on' : ''}">${e}</button>`).join('')}</div>
-    <label class="fl">Lieblingston <span class="fine">(den hört der andere bei deinen Pings)</span></label>
-    <div class="sounds">${SOUND_LIST.filter(s => s[0] !== 'alarm').map(s => `<button data-act="e-sound" data-s="${s[0]}" class="${s[0] === E.sound ? 'on' : ''}"><span>${s[1]}</span><small>${s[2]}</small></button>`).join('')}</div>`;
+    <label class="fl">Lieblingsfarbe <span class="fine">(als Ring um dein Profilbild)</span></label>
+    ${colorPickHTML()}`;
 }
 function refreshEditAvatar(){
   const box = $('#eav'); if (!box) return;
@@ -1716,9 +1497,13 @@ function refreshEditAvatar(){
   box.innerHTML = E.avatarURL ? `<div class="av" style="width:86px;height:86px"><img src="${E.avatarURL}" alt=""></div>` : `<div class="av" style="width:86px;height:86px;font-size:48px">${esc(E.emoji)}</div>`;
 }
 async function saveProfileForm(){
-  const r = E.role, p = { ...prof(r), role:r };
-  if (!USERS[r].fixedNick) { const n = ($('#enick') && $('#enick').value || '').trim(); p.nick = n || USERS[r].nick; } else p.nick = USERS[r].nick;
-  p.emoji = E.emoji; p.sound = E.sound; p.updated_at = Date.now();
+  const r = S.me, p = { ...prof(r), role:r };
+  delete p.sound;
+  const n = ($('#enick') && $('#enick').value || '').trim();
+  if ($('#enick')) p.nick = n || p.nick || 'Mitglied';
+  const un = slug(($('#euname') && $('#euname').value) || '');
+  if ($('#euname')) p.username = un || slug(p.nick) || null;
+  p.emoji = E.emoji || p.emoji || '🙂'; p.color = E.color || null; p.updated_at = Date.now();
   if ($('#ebio')) p.bio = $('#ebio').value.trim().slice(0, 150);
   if ($('#elink')) p.link = $('#elink').value.trim().slice(0, 200);
   if ($('#epron')) p.pronouns = $('#epron').value.trim().slice(0, 20);
@@ -1728,31 +1513,25 @@ async function saveProfileForm(){
   if (E.avatarURL) { URL.revokeObjectURL(E.avatarURL); E.avatarURL = null; }
 }
 function openProfileEdit(){
-  const r = S.me, p = prof(r);
-  E.role = r; E.emoji = p.emoji || USERS[r].emoji; E.sound = p.sound || USERS[r].sound; E.avatarPr = null; E.removePhoto = false;
+  const p = prof(S.me);
+  E.emoji = p.emoji || '🙂'; E.color = p.color || ''; E.avatarPr = null; E.removePhoto = false; E.unameTouched = true;
   if (E.avatarURL) { URL.revokeObjectURL(E.avatarURL); E.avatarURL = null; }
   closeSheet(); S.tab = 'editprof'; $('#app').innerHTML = ''; render(); window.scrollTo(0, 0);
 }
 function editProfHTML(){
-  const r = S.me, p = prof(r), fixed = USERS[r].fixedNick;
+  const r = S.me, p = prof(r);
   const photo = E.avatarURL ? `<img src="${E.avatarURL}" alt="">` : (!E.removePhoto && p.avatar_path ? `<img data-media="${esc(p.avatar_path)}" alt="">` : I.person);
   return `<div id="editprof" class="editprof">
     <header class="ep-top"><button class="icon-btn ep-back" data-act="e-back" aria-label="Zurück">${I.back}</button><h1>Profil bearbeiten</h1><span></span></header>
     <div class="ep-pic" id="eav"><div class="ep-c ep-photo">${photo}</div><div class="ep-c ep-emoji">${esc(E.emoji)}</div></div>
     <button class="ep-edit" data-act="e-picmenu">Bild oder Avatar bearbeiten</button>
     <div class="ep-rows">
-      <label class="er"><span>Name</span><input type="text" id="enick" value="${esc(nick(r))}" maxlength="24" ${fixed ? 'readonly' : ''} autocomplete="off"></label>
-      <label class="er"><span>Benutzername</span><input type="text" value="${esc(nick(r).toLowerCase().replace(/\s+/g, '_'))}" readonly></label>
+      <label class="er"><span>Name</span><input type="text" id="enick" value="${esc(nick(r))}" maxlength="24" autocomplete="off"></label>
+      <label class="er"><span>Benutzername</span><input type="text" id="euname" value="${esc(uname(r))}" maxlength="24" autocomplete="off" autocapitalize="none" spellcheck="false"></label>
       <label class="er"><span>Pronomen</span><input type="text" id="epron" value="${esc(p.pronouns || '')}" maxlength="20" placeholder="Pronomen" autocomplete="off"></label>
       <label class="er"><span>Bio</span><textarea id="ebio" rows="1" maxlength="150" placeholder="Bio">${esc(p.bio || '')}</textarea></label>
       <label class="er"><span>Links</span><input type="text" id="elink" value="${esc(p.link || '')}" maxlength="200" placeholder="Link hinzufügen" autocomplete="off" inputmode="url"></label>
-      <button class="er erb" data-act="e-sounds"><span>Lieblingston</span><em id="esndl">${soundInfo(E.sound)[1]} ${soundInfo(E.sound)[2]}</em>${I.chev}</button>
-      <div id="esnd" style="display:none;padding:10px 16px 4px"><div class="sounds">${SOUND_LIST.filter(s => s[0] !== 'alarm').map(s => `<button data-act="e-sound" data-s="${s[0]}" class="${s[0] === E.sound ? 'on' : ''}"><span>${s[1]}</span><small>${s[2]}</small></button>`).join('')}</div></div>
-    </div>
-    <div class="ep-rows ep-more">
-      <button class="er erb" data-act="settings"><span class="wide">Einladungslink & Einstellungen</span>${I.chev}</button>
-      <button class="er erb" data-act="perm-push"><span class="wide">Benachrichtigungen</span>${I.chev}</button>
-      <button class="er erb" data-act="howto"><span class="wide">So funktioniert Unsergram</span>${I.chev}</button>
+      <div class="er" style="display:block"><span style="display:block;margin-bottom:8px">Lieblingsfarbe</span>${colorPickHTML()}</div>
     </div>
   </div>`;
 }
@@ -1768,31 +1547,34 @@ async function leaveEditProf(){
   await saveProfileForm(); S.tab = 'profile'; S.profileOf = null; S.profileTab = 'grid'; $('#app').innerHTML = ''; render(); window.scrollTo(0, 0); toast('Gespeichert');
 }
 
-/* ---------- Einstellungen ---------- */
-function inviteURL(){ return `${location.origin}${location.pathname}#join=${S.secret}`; }
-function restoreURL(){ return `${location.origin}${location.pathname}#restore=${S.secret}-${S.me}`; }
-const RESTORE_RX = /restore=([a-f0-9]{16,})-(je|anke)/i;
+/* ---------- Links ---------- */
+const BASE = () => `${location.origin}${location.pathname}`;
+const inviteURL = token => `${BASE()}#join=${token}`;
+const restoreURL = () => `${BASE()}#restore=${S.restore}`;
+const JOIN_RX = /join=([a-f0-9]{24})/i, RESTORE_RX = /restore=([a-f0-9]{32})/i;
+
+/* ---------- Einstellungen (≡) ---------- */
 function openRestoreLink(){
-  const u = restoreURL(), txt = `Mein Unsergram-Wiederherstellen-Link (${nick(S.me)}) – nicht weitergeben: ${u}`;
+  const u = restoreURL(), txt = `Mein ${APP_NAME}-Wiederherstellen-Link – nicht weitergeben: ${u}`;
   openSheet(`<h3 class="sh-title">Dein Wiederherstellen-Link</h3>
-    <p class="muted" style="margin:0 0 6px">Damit holst du dein Unsergram mit einem Tipp zurück – z. B. wenn du die App neu auf den Home-Bildschirm legst oder ein neues Handy hast. Alles ist danach wieder da.</p>
-    <p style="margin:0 0 6px;font-size:13px"><b>Nur für dich.</b> Wer diesen Link hat, ist in der App „${esc(nick(S.me))}“. ${esc(nick(other()))} bekommt den normalen Einladungslink.</p>
+    <p class="muted" style="margin:0 0 6px">Damit holst du dein ${APP_NAME} mit einem Tipp zurück – z. B. wenn du die App neu auf den Home-Bildschirm legst oder ein neues Handy hast. Alles ist danach wieder da.</p>
+    <p style="margin:0 0 6px;font-size:13px"><b>Nur für dich.</b> Wer diesen Link hat, ist in der App du.</p>
     <div class="linkbox">${esc(u)}</div>
     <button class="btn primary" data-act="copy-restore">Link kopieren</button>
     <a class="btn" style="text-decoration:none" href="https://wa.me/?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">Per WhatsApp an mich schicken</a>
     <button class="btn" data-act="share-restore">Teilen / in Notizen sichern …</button>
-    <p class="fine" style="margin-top:12px"><b>So geht’s später:</b> App neu öffnen → „Wiederherstellen“ → Einfügen → fertig.</p>`, 'tall');
+    <p class="fine" style="margin-top:12px"><b>So geht’s später:</b> App öffnen → „Wiederherstellen“ → Einfügen → fertig.</p>`, 'tall');
 }
-async function doRestore(secret, role){
+async function doRestore(token){
   if (!Sync.configured) throw new Error('Kein Server eingerichtet');
   await Sync.ensureAuth();
-  const r = await Sync.sb.rpc('join_space', { p_secret:secret, p_role:role }); if (r.error) throw r.error;
-  S.spaceId = r.data.space_id; S.secret = r.data.secret; S.me = role;
-  await meta.set('device', { user:S.me, spaceId:S.spaceId, secret:S.secret });
+  const r = await Sync.sb.rpc('restore_device', { p_restore:token }); if (r.error) throw r.error;
+  S.spaceId = r.data.space_id; S.me = r.data.pid; S.isOwner = !!r.data.is_owner; S.restore = r.data.restore; S.removed = false;
+  await saveDevice();
   if (location.hash || location.search) history.replaceState(null, '', location.pathname);
   await Sync.start();
   const needPush = 'Notification' in window && Notification.permission !== 'granted' && !(isIOS() && !standalone());
-  if (needPush) { S.onb = { step:'push', mode:'restore', role }; render(); }
+  if (needPush) { S.onb = { step:'push', mode:'restore' }; render(); }
   else { S.onb = null; S.tab = 'home'; render(); }
   toast(`Willkommen zurück, ${nick(S.me)} ✓`);
 }
@@ -1800,33 +1582,24 @@ async function openSettings(){
   const pend = await Outbox.count();
   const pushOk = 'Notification' in window && Notification.permission === 'granted';
   openSheet(`<h3 class="sh-title">Einstellungen</h3><div class="menu">
-    <button class="btn" data-act="edit-profile">Profil & Lieblingston</button>
+    <button class="btn" data-act="edit-profile">Profil bearbeiten</button>
     <button class="btn" data-act="perm-push">${pushOk ? '✓ Benachrichtigungen aktiv – neu verbinden' : 'Benachrichtigungen einschalten'}</button>
     ${pushOk ? '<button class="btn" data-act="push-test">Test-Benachrichtigung an mich</button>' : ''}
-    <button class="btn" data-act="perm-geo">Standort testen</button>
-    ${S.secret ? '<button class="btn" data-act="invite">Einladungslink für ' + esc(nick(other())) + '</button><button class="btn" data-act="restore-link">Mein Wiederherstellen-Link</button>' : ''}
-    <button class="btn" data-act="challenge">Challenges</button>
+    ${S.isOwner ? '<button class="btn" data-act="circle">Inner Circle & Einladen</button>' : ''}
+    ${S.restore ? '<button class="btn" data-act="restore-link">Mein Wiederherstellen-Link</button>' : ''}
     ${!standalone() ? `<button class="btn" data-act="${S.installEvt ? 'install' : 'howto'}">${isAndroid() ? 'Auf den Startbildschirm (Android)' : 'Auf den Home-Bildschirm'}</button>` : ''}
-    <button class="btn" data-act="howto">So funktioniert’s (Hintergrund, Fotos, iPhone & Android)</button>
-    ${!Sync.configured ? '<button class="btn" data-act="switch-user">Testmodus: Ansicht wechseln</button>' : ''}
+    <button class="btn" data-act="howto">So funktioniert’s</button>
     <button class="btn" data-act="close-sheet">Schließen</button></div>
     <p class="fine" style="text-align:center;margin-top:12px">Version ${APP_VERSION} · ${esc(syncLine())}${pend ? ` · ${pend} Änderung(en) warten` : ''}</p>
     ${pend ? `<button class="btn" data-act="flush-now">Jetzt senden</button>` : ''}
     ${Outbox.lastError ? `<p class="fine" style="text-align:center;color:var(--danger)">Problem: ${esc(Outbox.lastError.slice(0, 160))}</p>` : ''}`, 'tall');
 }
-function openInvite(){
-  const u = inviteURL(), txt = `Hier ist unser Unsergram 💛 Öffne den Link (iPhone: in Safari, Android: in Chrome), dort steht, wie es weitergeht: ${u}`;
-  openSheet(`<h3 class="sh-title">Einladung für ${esc(nick(other()))}</h3>
-    <p class="muted" style="margin:0 0 6px">Dieser Link ist der Schlüssel. Kein Passwort, kein Konto. Nur an ${esc(nick(other()))} schicken.</p>
-    <div class="linkbox">${esc(u)}</div>
-    <a class="btn primary" style="text-decoration:none" href="https://wa.me/?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">Per WhatsApp schicken</a>
-    <button class="btn" data-act="share-invite">Teilen …</button><button class="btn" data-act="copy-invite">Link kopieren</button>`);
-}
 function openHowto(){
   openSheet(`<h3 class="sh-title">So funktioniert’s</h3>
-    <p><b>Benachrichtigungen</b><br>Ist die App offen, hörst du Sounds sofort. Ist sie im Hintergrund oder geschlossen, kommt eine Benachrichtigung – auf dem iPhone nur, wenn die App auf dem Home-Bildschirm liegt (Teilen → „Zum Home-Bildschirm“). Auf Android klappt es auch im Chrome-Browser; als App installieren geht über ⋮ → „App installieren“. Eigene Tier-Töne spielt das Handy dabei nicht ab, nur den normalen Mitteilungston. Hat man die App komplett weggewischt, kann das System Mitteilungen verzögern.</p>
-    <p><b>Standort</b><br>Nur wenn du „Such mich“ oder „Komm vorbei“ drückst, wird einmal grob (ca. 100 m) mitgeschickt. Keine Ortung im Hintergrund.</p>
-    <p><b>Fotos</b><br>Alles liegt auf dem Gerät und wird zwischen euch abgeglichen. Ein Foto ins Fotos-Album: Beitrag → „…“ → „In Fotos sichern“. Einen eigenen Album-Ordner automatisch anlegen kann eine Web-App leider nicht.</p>
+    <p><b>Nur ihr</b><br>${APP_NAME} ist ein privater Kreis mit höchstens ${MAX_PEOPLE} Personen. Rein kommt nur, wer eine Einladung bekommt – Einladungen verschickt nur die Besitzerin.</p>
+    <p><b>Benachrichtigungen</b><br>Auf dem iPhone kommen sie nur, wenn die App auf dem Home-Bildschirm liegt (Teilen → „Zum Home-Bildschirm“). Auf Android klappt es auch in Chrome; als App installieren geht über ⋮ → „App installieren“.</p>
+    <p><b>Fotos</b><br>Ein Foto ins Fotos-Album holen: beim Beitrag auf das Menü → „In Fotos sichern“.</p>
+    <p><b>Neues Handy?</b><br>Einstellungen → „Mein Wiederherstellen-Link“. Den Link gut aufheben.</p>
     <button class="btn" data-act="close-sheet">Alles klar</button>`, 'tall');
 }
 async function enablePush(){
@@ -1847,21 +1620,71 @@ async function enablePush(){
   return true;
 }
 
-/* ---------- Onboarding ---------- */
-const ONB_STEPS_NEW = ['welcome','who','profile','home','push','geo','info','invite'];
-const ONB_STEPS_JOIN = ['welcome','who','profile','home','push','geo','info'];
-function onbSteps(){ if (S.onb.mode === 'restore') return S.onb.step === 'push' ? ['push'] : ['welcome']; let s = S.onb.mode === 'join' ? ONB_STEPS_JOIN : ONB_STEPS_NEW; if (!Sync.configured) s = ['welcome','who','profile']; if (!((isIOS() || isAndroid()) && !standalone())) s = s.filter(x => x !== 'home');
+/* ---------- Inner Circle & Einladen (nur Besitzerin) ---------- */
+async function openInvites(){
+  if (!Sync.ready) return [];
+  const r = await Sync.sb.from('invites').select('*').eq('space_id', S.spaceId).eq('kind', 'member').is('used_at', null).is('revoked_at', null).order('created_at');
+  if (r.error) { toast(r.error.message); return []; }
+  return r.data || [];
+}
+async function openCircle(){
+  if (!S.isOwner) return;
+  if (!Sync.ready) { toast('Nicht verbunden – Internet?'); return; }
+  const inv = await openInvites(), act = activePids(), full = act.length >= MAX_PEOPLE, blocked = act.length + inv.length >= MAX_PEOPLE;
+  const mem = act.filter(p => p !== S.me).map(p => `<div class="act">${avatar(p, 40)}<p><b>${esc(nick(p))}</b><br><span class="muted">${esc(uname(p))}</span></p><button class="link" style="color:var(--danger)" data-act="rm-ask" data-u="${p}">Entfernen</button></div>`).join('');
+  const op = inv.map(i => `<div class="act"><div class="av" style="width:40px;height:40px;font-size:20px">💌</div><p><b>${esc(i.label || 'Einladung')}</b><br><span class="muted">offen · ${ago(new Date(i.created_at).getTime())}</span></p>
+    <button class="link strong" data-act="inv-share" data-id="${i.token}" data-l="${esc(i.label || '')}">Teilen</button><button class="link" style="color:var(--danger);margin-left:8px" data-act="inv-revoke" data-id="${i.token}">Zurückziehen</button></div>`).join('');
+  openSheet(`<h3 class="sh-title">Inner Circle</h3>
+    <p style="text-align:center;margin:0 0 4px;font-size:17px"><b>${act.length} von ${MAX_PEOPLE} Plätzen belegt</b></p>
+    <p class="muted" style="text-align:center;margin:0 0 12px">${inv.length ? `${inv.length} ${inv.length === 1 ? 'Einladung ist' : 'Einladungen sind'} noch offen` : 'Keine offenen Einladungen'}</p>
+    ${full ? `<p style="text-align:center;font-weight:600">Dein Inner Circle ist voll (${MAX_PEOPLE}/${MAX_PEOPLE})</p>`
+      : blocked ? `<p class="muted" style="text-align:center">Alle Plätze sind belegt oder schon als Einladung unterwegs. Zieh eine offene Einladung zurück, um jemand anderen einzuladen.</p>`
+      : `<label class="fl" for="invfor">Neue Einladung – für wen?</label><input type="text" id="invfor" maxlength="40" placeholder="z. B. Lisa" autocomplete="off"><button class="btn primary" data-act="inv-new" id="invnew" style="margin-top:8px">Einladung erstellen</button>`}
+    ${inv.length ? `<h4 class="act-h">Offene Einladungen</h4>${op}` : ''}
+    <h4 class="act-h">Mitglieder</h4>
+    <div class="act">${avatar(S.me, 40)}<p><b>${esc(nick(S.me))}</b><br><span class="muted">Du · Besitzerin</span></p></div>${mem}
+    <p class="fine" style="text-align:center;margin-top:12px">Jede Einladung gilt für genau eine Person und nur einmal.</p>`, 'tall');
+}
+function showInvite(token, label){
+  const u = inviteURL(token), txt = `${label ? 'Hey ' + label + '! ' : ''}Du bist in meinem ${APP_NAME} – meinem eigenen kleinen Instagram nur für meine Liebsten 💛 Öffne den Link (iPhone: in Safari, Android: in Chrome), dort steht, wie es weitergeht: ${u}`;
+  openSheet(`<h3 class="sh-title">Einladung${label ? ' für ' + esc(label) : ''}</h3>
+    <p class="muted" style="margin:0 0 6px">Dieser Link gilt einmal – für genau eine Person. Kein Passwort, kein Konto.</p>
+    <div class="linkbox">${esc(u)}</div>
+    <a class="btn primary" style="text-decoration:none" href="https://wa.me/?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">Per WhatsApp schicken</a>
+    <button class="btn" data-act="inv-native" data-id="${token}" data-l="${esc(label || '')}">Teilen …</button><button class="btn" data-act="inv-copy" data-id="${token}">Link kopieren</button>
+    <button class="btn" data-act="circle">Zurück</button>`, 'tall');
+}
+
+/* ---------- Einrichtung ---------- */
+function onbSteps(){
+  const o = S.onb;
+  if (o.mode === 'restore') return o.step === 'push' ? ['push'] : ['welcome'];
+  let s = ['welcome', 'profile', 'home', 'push', 'info'];
+  if (o.info && o.info.kind === 'owner') s.push('invite');
+  if (!((isIOS() || isAndroid()) && !standalone())) s = s.filter(x => x !== 'home');
   else if (isAndroid()) s = [...s.filter(x => x !== 'home'), 'home'];
-  return s; }
+  return s;
+}
+const STATUS_TXT = {
+  used:['🔑', 'Bereits eingelöst', 'Diese Einladung wurde schon benutzt. Wenn du das warst: nutze deinen Wiederherstellen-Link.'],
+  revoked:['🚫', 'Einladung zurückgezogen', 'Diese Einladung gilt nicht mehr. Frag nach einer neuen.'],
+  invalid:['❓', 'Link ungültig', 'Dieser Link funktioniert nicht. Prüf, ob er vollständig kopiert wurde.'],
+  full:['🔒', `Der Inner Circle ist voll (${MAX_PEOPLE}/${MAX_PEOPLE})`, 'Gerade ist kein Platz frei.']
+};
+function pasteBox(restoreOnly){
+  return `<div id="joinbox" style="display:none"><input type="text" id="joinin" placeholder="${restoreOnly ? 'Wiederherstellen-Link einfügen' : 'Einladungs- oder Wiederherstellen-Link einfügen'}" autocomplete="off" style="margin-bottom:8px">
+    <button class="btn primary" data-act="onb-join" id="joingo">Weiter</button></div>`;
+}
 function onbHTML(){
   const o = S.onb, steps = onbSteps(), i = steps.indexOf(o.step);
   const dots = `<div class="dots">${steps.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div>`;
   const next = (label='Weiter', act='onb-next') => `<button class="btn primary" data-act="${act}">${label}</button>`;
   const skip = `<button class="btn" data-act="onb-next" style="background:none;color:var(--muted)">Später</button>`;
+  const owner = o.info && o.info.kind === 'owner';
   switch (o.step) {
     case 'welcome': {
-      if (isAndroid() && (isSamsungBrowser() || isInAppBrowser()) && !standalone() && !o.forceHere) return `<div class="step"><div class="ico">🌐</div><h2>Bitte in Chrome öffnen</h2>
-        <p>Du bist gerade im ${isSamsungBrowser() ? 'Samsung-Internet-Browser' : 'eingebauten Browser einer App'}. Der installiert Unsergram nicht sauber – daher kommt die Warnung „ältere Android-Version / nicht sicher“. Unsergram selbst ist nicht unsicher.</p>
+      if (isAndroid() && (isSamsungBrowser() || isInAppBrowser()) && !standalone() && !o.forceHere && (o.token || o.restore)) return `<div class="step"><div class="ico">🌐</div><h2>Bitte in Chrome öffnen</h2>
+        <p>Du bist gerade im ${isSamsungBrowser() ? 'Samsung-Internet-Browser' : 'eingebauten Browser einer App'}. Der installiert ${APP_NAME} nicht sauber – daher kommt sonst die Warnung „ältere Android-Version / nicht sicher“. ${APP_NAME} selbst ist nicht unsicher.</p>
         <p>In <b>Chrome</b> klappt alles: Einrichten und mit einem Tipp installieren.</p>
         <div class="grow"></div><a class="btn primary" style="text-decoration:none" href="${chromeIntentURL()}">In Chrome öffnen</a>
         <button class="btn" data-act="onb-here" style="background:none;color:var(--muted)">Trotzdem hier weiter</button></div>`;
@@ -1872,58 +1695,60 @@ function onbHTML(){
           <div class="grow"></div><button class="btn primary" data-act="copy-join">Link kopieren</button>
           <button class="btn" data-act="onb-restore-go" style="background:none;color:var(--muted)">Lieber hier im Browser</button></div>`;
         return `<div class="step"><div class="grow" style="display:flex;flex-direction:column;justify-content:center;text-align:center">
-          <div class="wordmark" style="font-size:58px">${esc(APP_NAME)}</div><p style="margin-top:12px">Willkommen zurück, ${esc(USERS[o.role].nick === 'Anke' ? 'Anke' : USERS[o.role].nick)} 🔑</p></div>
+          <div class="wordmark" style="font-size:58px">${esc(APP_NAME)}</div><p style="margin-top:12px">Willkommen zurück 🔑</p></div>
           <button class="btn primary" data-act="onb-restore-go" id="rstgo">Wiederherstellen</button><p class="fine" id="rsterr" style="color:var(--danger);text-align:center"></p></div>`;
       }
-      if (o.mode === 'join' && isIOS() && !standalone()) return `<div class="step"><div class="ico">💌</div><h2>Du wurdest eingeladen</h2>
-        <p>Auf dem iPhone in dieser Reihenfolge:</p>
-        <ol><li>Unten auf <b>„Einladung kopieren“</b> tippen</li><li>In Safari auf <b>Teilen</b> (Quadrat mit Pfeil) → <b>„Zum Home-Bildschirm“</b></li>
-        <li>Die App über das neue Symbol öffnen</li><li>Dort <b>„Ich habe eine Einladung“</b> → <b>„Einfügen“</b></li></ol>
-        <div class="grow"></div><button class="btn primary" data-act="copy-join">Einladung kopieren</button>
-        <button class="btn" data-act="onb-next" style="background:none;color:var(--muted)">Lieber hier im Browser weiter</button></div>`;
+      if (o.mode === 'join') {
+        if (!o.info) return `<div class="step"><div class="grow" style="display:flex;flex-direction:column;justify-content:center;text-align:center"><div class="wordmark" style="font-size:58px">${esc(APP_NAME)}</div><p class="muted" style="margin-top:12px">Einladung wird geprüft …</p></div></div>`;
+        const st = STATUS_TXT[o.info.status];
+        if (st) return `<div class="step"><div class="ico">${st[0]}</div><h2>${esc(st[1])}</h2><p>${esc(st[2])}</p><div class="grow"></div>
+          ${o.info.status === 'used' ? `${pasteBox(true)}<button class="btn primary" data-act="onb-paste" data-r="1">🔑 Wiederherstellen-Link einfügen</button>` : ''}
+          <button class="btn" data-act="onb-start" style="background:none;color:var(--muted)">Zum Anfang</button></div>`;
+        if (isIOS() && !standalone()) return `<div class="step"><div class="ico">💌</div><h2>${owner ? 'Dein eigenes ' + esc(APP_NAME) : 'Du wurdest eingeladen'}</h2>
+          <p>Auf dem iPhone in dieser Reihenfolge:</p>
+          <ol><li>Unten auf <b>„Einladung kopieren“</b> tippen</li><li>In Safari auf <b>Teilen</b> (Quadrat mit Pfeil) → <b>„Zum Home-Bildschirm“</b></li>
+          <li>Die App über das neue Symbol öffnen</li><li>Dort <b>„Ich habe eine Einladung“</b> → <b>„Einfügen“</b></li></ol>
+          <div class="grow"></div><button class="btn primary" data-act="copy-join">Einladung kopieren</button>
+          <button class="btn" data-act="onb-next" style="background:none;color:var(--muted)">Lieber hier im Browser weiter</button></div>`;
+        return `<div class="step"><div class="grow" style="display:flex;flex-direction:column;justify-content:center;text-align:center">
+          <div class="wordmark" style="font-size:58px">${esc(APP_NAME)}</div>
+          <p style="margin-top:12px">${owner ? 'Dein eigenes Instagram – nur für dich und deine 10 Liebsten 💛' : 'Du wurdest in einen Inner Circle eingeladen 💛 Ein paar Schritte, dann bist du dabei.'}</p></div>
+          ${dots}${next('Los geht’s')}</div>`;
+      }
       return `<div class="step"><div class="grow" style="display:flex;flex-direction:column;justify-content:center;text-align:center">
         <div class="wordmark" style="font-size:58px">${esc(APP_NAME)}</div>
-        <p style="margin-top:12px">${o.mode === 'join' ? 'Du wurdest eingeladen 💛 Ein paar Schritte, dann seid ihr verbunden.' : 'Nur für euch zwei. Momente, Stories, Challenges, Chat – und ein Knopf, wenn man den anderen braucht.'}</p></div>
-        ${dots}${o.mode === 'join' ? next('Los geht’s') : ''}
-        ${o.mode !== 'join' && Sync.configured ? `<div id="joinbox" style="display:none"><input type="text" id="joinin" placeholder="Einladungs- oder Wiederherstellen-Link einfügen" autocomplete="off" style="margin-bottom:8px">
-          <button class="btn primary" data-act="onb-join" id="joingo">Verbinden</button></div>
-          <button class="btn primary" data-act="onb-paste" id="joinpaste">Ich habe eine Einladung</button>
-          <button class="btn" data-act="onb-paste" data-r="1">🔑 Wiederherstellen</button>
-          <button class="btn" data-act="onb-new-ask">Neu einrichten (ich lade ein)</button>` : (o.mode !== 'join' ? next('Einrichten') : '')}</div>`;
+        <p style="margin-top:12px">Ein privater Kreis für höchstens ${MAX_PEOPLE} Personen. Rein kommst du nur mit einer Einladung.</p></div>
+        ${pasteBox(false)}
+        <button class="btn primary" data-act="onb-paste" id="joinpaste">Ich habe eine Einladung</button>
+        <button class="btn" data-act="onb-paste" data-r="1">🔑 Wiederherstellen</button></div>`;
     }
-    case 'who': return `<div class="step"><div class="ico">👋</div><h2>Wer bist du?</h2><p>Das bleibt auf diesem Handy so eingestellt.</p><div class="grow"></div>${dots}
-        <button class="btn primary" data-act="onb-who" data-u="je">Ich bin j from e</button><button class="btn" data-act="onb-who" data-u="anke">Ich bin Anke</button></div>`;
-    case 'profile': return `<div class="step"><h2>Dein Profil</h2>${profileFormHTML(o.role)}<div class="grow" style="min-height:16px"></div>${dots}
-        <button class="btn primary" data-act="onb-profile" id="onbgo">${Sync.configured ? 'Weiter & verbinden' : 'Los geht’s'}</button><p class="fine" id="onberr" style="color:var(--danger);text-align:center"></p></div>`;
-    case 'home': if (isAndroid()) return `<div class="step"><div class="ico">📲</div><h2>Letzter Schritt: Unsergram auf den Startbildschirm</h2>
-        <p>Dann startet Unsergram wie eine richtige App – mit eigenem Symbol, ohne Browser-Leiste. Alles, was du gerade eingerichtet hast, bleibt erhalten.</p>
-        ${isSamsungBrowser() || isInAppBrowser() ? '<p><b>Hinweis:</b> Installieren bitte nur über <b>Chrome</b> – dieser Browser löst sonst die Warnung „ältere Android-Version“ aus. Öffne dazu deinen Wiederherstellen-Link (Profil → Zahnrad) in Chrome.</p>'
-          : S.installed ? '<p class="ok">✓ Unsergram ist installiert. Du findest es jetzt auf deinem Startbildschirm.</p>'
+    case 'profile': return `<div class="step"><h2>Dein Profil</h2>${profileFormHTML()}<div class="grow" style="min-height:16px"></div>${dots}
+        <button class="btn primary" data-act="onb-profile" id="onbgo">Einrichtung abschließen</button><p class="fine" id="onberr" style="color:var(--danger);text-align:center"></p></div>`;
+    case 'home': if (isAndroid()) return `<div class="step"><div class="ico">📲</div><h2>Letzter Schritt: ${esc(APP_NAME)} auf den Startbildschirm</h2>
+        <p>Dann startet ${esc(APP_NAME)} wie eine richtige App – mit eigenem Symbol, ohne Browser-Leiste. Alles, was du gerade eingerichtet hast, bleibt erhalten.</p>
+        ${isSamsungBrowser() || isInAppBrowser() ? '<p><b>Hinweis:</b> Installieren bitte nur über <b>Chrome</b>. Öffne dazu deinen Wiederherstellen-Link (Profil → ≡) in Chrome.</p>'
+          : S.installed ? `<p class="ok">✓ ${esc(APP_NAME)} ist installiert. Du findest es jetzt auf deinem Startbildschirm.</p>`
           : S.installEvt ? '<p>Ein Tipp auf den Knopf – dein Handy fragt einmal nach, dann ist es erledigt.</p>'
           : `<p>Falls kein Knopf erscheint, geht es so:</p><ol><li>Oben rechts in Chrome auf die <b>drei Punkte ⋮</b> tippen</li><li><b>„App installieren“</b> oder <b>„Zum Startbildschirm hinzufügen“</b> wählen</li><li>Bestätigen – fertig</li></ol>`}
         <div class="grow"></div>${dots}
         ${S.installed ? next('Fertig') : S.installEvt ? '<button class="btn primary" data-act="install">App installieren</button>' + `<button class="btn" data-act="onb-next" style="background:none;color:var(--muted)">Später</button>` : next('Erledigt – fertig')}</div>`;
       return `<div class="step"><div class="ico">📲</div><h2>Auf den Home-Bildschirm</h2>
         <p>Auf dem iPhone kommen Benachrichtigungen nur, wenn die App auf dem Home-Bildschirm liegt:</p>
-        <ol><li>Unten in Safari auf <b>Teilen</b> (Quadrat mit Pfeil) tippen</li><li><b>„Zum Home-Bildschirm“</b> wählen</li><li>Die App dann über das neue Symbol öffnen</li></ol>
-        <p>Danach geht’s dort mit den Benachrichtigungen weiter.</p><div class="grow"></div>${dots}${next('Erledigt / Weiter')}</div>`;
+        <ol><li>Erst in den Einstellungen (Profil → ≡) deinen <b>Wiederherstellen-Link kopieren</b></li><li>Unten in Safari auf <b>Teilen</b> → <b>„Zum Home-Bildschirm“</b></li><li>Die App über das neue Symbol öffnen → „Wiederherstellen“ → Einfügen</li></ol>
+        <div class="grow"></div>${dots}${next('Erledigt / Weiter')}</div>`;
     case 'push': return `<div class="step"><div class="ico">🔔</div><h2>Benachrichtigungen</h2>
-        <p>Damit du merkst, wenn ${esc(nick(other()))} dir schreibt, gute Laune hat, traurig ist oder dich braucht.</p>
-        <p>Ist die App im Hintergrund, kommt eine Mitteilung mit Ton. Eigene Tier-Töne gehen dabei nicht – die hörst du, wenn die App offen ist. Ganz geschlossen entscheidet das Handy, wie schnell es zustellt.</p>
+        <p>Damit du merkst, wenn dir jemand schreibt, etwas teilt, kommentiert oder deinen Beitrag likt.</p>
         <p id="pushst">${'Notification' in window && Notification.permission === 'granted' ? '<span class="ok">✓ Bereits erlaubt</span>' : ''}</p>
         <div class="grow"></div>${dots}<button class="btn primary" data-act="onb-push">Erlauben</button>${skip}</div>`;
-    case 'geo': return `<div class="step"><div class="ico">📍</div><h2>Standort</h2>
-        <p>Nur wenn du <b>„Such mich“</b> oder <b>„Komm vorbei“</b> drückst, wird einmal dein ungefährer Standort (ca. 100 m) an ${esc(nick(other()))} geschickt. Sonst nie, auch nicht im Hintergrund.</p>
-        <p id="geost"></p><div class="grow"></div>${dots}<button class="btn primary" data-act="onb-geo">Erlauben</button>${skip}</div>`;
     case 'info': return `<div class="step"><div class="ico">📸</div><h2>Fotos & Speicher</h2>
-        <p>Eure Fotos, Chats und Profile liegen auf euren Handys und werden zwischen euch beiden abgeglichen – auch wenn mal kein Netz da ist, kommt alles später nach.</p>
-        <p>Ein Foto ins Fotos-Album holen: beim Beitrag auf „…“ → <b>„In Fotos sichern“</b>.</p>
+        <p>Fotos, Nachrichten und Profile liegen auf deinem Handy und werden im Inner Circle abgeglichen – auch ohne Netz kommt alles später nach.</p>
+        <p>Ein Foto ins Fotos-Album holen: beim Beitrag auf das Menü → <b>„In Fotos sichern“</b>.</p>
+        <p><b>Wichtig:</b> Unter Profil → ≡ findest du deinen <b>Wiederherstellen-Link</b>. Heb ihn gut auf – damit kommst du auch auf einem neuen Handy wieder rein.</p>
         <div class="grow"></div>${dots}${next()}</div>`;
-    case 'invite': return `<div class="step"><div class="ico">💌</div><h2>Jetzt ${esc(nick(other()))} einladen</h2>
-        <p>Schick diesen Link. Er ist der Schlüssel – kein Passwort, kein Konto.</p><div class="linkbox">${esc(inviteURL())}</div>
-        <a class="btn primary" style="text-decoration:none" href="https://wa.me/?text=${encodeURIComponent('Hier ist unser Unsergram 💛 Öffne den Link (iPhone: in Safari, Android: in Chrome), dort steht, wie es weitergeht: ' + inviteURL())}" target="_blank" rel="noopener">Per WhatsApp schicken</a>
-        <button class="btn" data-act="share-invite">Teilen …</button><button class="btn" data-act="copy-invite">Link kopieren</button>
-        <div class="grow"></div>${dots}${next('Fertig')}</div>`;
+    case 'invite': return `<div class="step"><div class="ico">💌</div><h2>Lade deine Liebsten ein</h2>
+        <p>Du bist die Besitzerin. Nur du kannst einladen und Leute entfernen – höchstens ${MAX_PEOPLE} Personen insgesamt, dich eingerechnet.</p>
+        <p>Jede Einladung ist ein eigener Link für genau eine Person. Du findest das jederzeit unter Profil → ≡ → <b>„Inner Circle & Einladen“</b>.</p>
+        <div class="grow"></div>${dots}<button class="btn primary" data-act="onb-invite">Jetzt jemanden einladen</button>${next('Später')}</div>`;
   }
   return '';
 }
@@ -1937,22 +1762,27 @@ async function finishOnb(){
   if (location.hash || location.search) history.replaceState(null, '', location.pathname);
   render(); toast(`Hallo ${nick(S.me)}!`);
 }
+async function loadInviteInfo(){
+  try {
+    const sb = Sync.client(); if (!sb) throw new Error('Kein Server');
+    const r = await sb.rpc('invite_info', { p_token:S.onb.token });
+    S.onb.info = r.error ? { status:'invalid' } : r.data;
+  } catch (e) { S.onb.info = { status:'invalid', err:String(e.message || e) }; }
+  render();
+}
 async function onbProfile(){
   const btn = $('#onbgo'), err = $('#onberr');
+  const n = ($('#enick').value || '').trim();
+  if (!n) { err.textContent = 'Bitte gib deinen Namen ein.'; $('#enick').focus(); return; }
   btn.disabled = true; btn.textContent = 'Einen Moment …'; err.textContent = '';
   try {
-    if (Sync.configured) {
-      await Sync.ensureAuth();
-      const r = S.onb.joined ? { data:S.onb.joined } : S.onb.mode === 'join'
-        ? await Sync.sb.rpc('join_space', { p_secret:S.onb.secret, p_role:S.onb.role })
-        : await Sync.sb.rpc('create_space', { p_role:S.onb.role });
-      if (r.error) throw r.error;
-      S.spaceId = r.data.space_id; S.secret = r.data.secret;
-    } else { S.spaceId = 'local'; S.secret = null; }
-    S.me = S.onb.role;
-    await meta.set('device', { user:S.me, spaceId:S.spaceId, secret:S.secret });
+    await Sync.ensureAuth();
+    const r = await Sync.sb.rpc('redeem_invite', { p_token:S.onb.token });
+    if (r.error) throw r.error;
+    S.spaceId = r.data.space_id; S.me = r.data.pid; S.isOwner = !!r.data.is_owner; S.restore = r.data.restore; S.removed = false;
+    await saveDevice();
     await saveProfileForm();
-    if (Sync.configured) Sync.start().then(scheduleRender);
+    Sync.start().then(scheduleRender);
     await onbNext();
   } catch (e) {
     console.warn(e); btn.disabled = false; btn.textContent = 'Nochmal versuchen';
@@ -1971,22 +1801,32 @@ function watchVideos(){
 
 /* ---------- Ereignisse ---------- */
 async function copyText(t){ try { await navigator.clipboard.writeText(t); toast('Link kopiert'); } catch (_) { toast('Kopieren ging nicht – Link bitte markieren'); } }
+
 document.addEventListener('click', async e => {
   if ($('#popmenu') && !e.target.closest('#popmenu') && !e.target.closest('[data-act=feed-menu]')) closeFeedMenu();
   const t = e.target.closest('[data-act]'); if (!t) return;
   const a = t.dataset.act, id = t.dataset.id, u = t.dataset.u;
   switch (a) {
-    case 'tab': closeSheet(); closeFeedMenu(); if (LMap && t.dataset.tab !== 'map') { LMap.remove(); LMap = null; } S.tab = t.dataset.tab; if (S.tab === 'profile') { S.profileOf = null; S.profileTab = 'grid'; } $('#app').innerHTML = ''; render(); if (S.tab !== 'chat') window.scrollTo({ top:0 }); break;
+    case 'tab': closeSheet(); closeFeedMenu(); S.tab = t.dataset.tab; if (S.tab === 'chat') S.chatWith = null; if (S.tab === 'profile') { S.profileOf = null; S.profileTab = 'grid'; } $('#app').innerHTML = ''; render(); window.scrollTo({ top:0 }); break;
+    case 'inbox': S.chatWith = null; $('#app').innerHTML = ''; render(); window.scrollTo({ top:0 }); break;
+    case 'chat-with': openChat(u); break;
     case 'create': openCreate('post'); break;
     case 'create-story': openCreate('story'); break;
-    case 'cmode': C.mode = t.dataset.m; openCreate(C.mode, C.challenge); break;
+    case 'cmode': C.mode = t.dataset.m; openCreate(C.mode); break;
     case 'cbg': C.bg = GRADS[+t.dataset.i]; $$('#cgrads button').forEach(b => b.classList.toggle('on', b === t)); updatePreview(); break;
     case 'cclear': C.pr = null; updatePreview(); break;
     case 'publish': publish(); break;
     case 'like': setLike(id, 'toggle'); break;
     case 'fav': toggleFav(id); break;
     case 'repost': repostPost(id); break;
-    case 'share-post': sharePost(id); break;
+    case 'share-post': openSendPicker(id); break;
+    case 'send-pick': {
+      if (SEND.sel.has(u)) SEND.sel.delete(u); else SEND.sel.add(u);
+      const on = SEND.sel.has(u), pk = $('.pk', t); if (pk) { pk.style.background = on ? 'var(--fg)' : ''; pk.style.borderColor = on ? 'var(--fg)' : ''; pk.innerHTML = on ? `<span style="color:var(--bg);width:16px;height:16px;display:inline-flex">${I.check}</span>` : ''; }
+      const g = $('#sendgo'); if (g) { g.disabled = !SEND.sel.size; g.textContent = SEND.sel.size > 1 ? `An ${SEND.sel.size} senden` : 'Senden'; }
+      break;
+    }
+    case 'send-go': sendPostTo(); break;
     case 'feed-menu': e.stopPropagation(); if (!S.logoDone) { S.logoDone = true; clearTimeout(logoT); t.innerHTML = feedLabel(); } if ($('#popmenu')) closeFeedMenu(); else openFeedMenu(); break;
     case 'feed-mode': S.feedMode = t.dataset.m; meta.set('feedMode', S.feedMode); closeFeedMenu(); render(); window.scrollTo({ top:0 }); break;
     case 'reel-tap': { const now = Date.now(); if (taps[id] && now - taps[id] < 320) { taps[id] = 0; setLike(id, 'on'); t.play().catch(() => {}); } else { taps[id] = now; const v = t; if (v.paused) v.play().catch(() => {}); else v.pause(); } break; }
@@ -2002,11 +1842,8 @@ document.addEventListener('click', async e => {
     case 'profile': closeSheet(); S.tab = 'profile'; S.profileOf = u; S.profileTab = 'grid'; $('#app').innerHTML = ''; render(); window.scrollTo({ top:0 }); break;
     case 'ptab': S.profileTab = t.dataset.t; render(); break;
     case 'story-user': { const list = storiesOf(u, true); const f = list.findIndex(s => u !== S.me && !viewersOf(s.id).includes(S.me)); openViewer(list.map(s => ({ type:'story', s })), f < 0 ? 0 : f); break; }
-    case 'no-story': closeSheet(); S.tab = 'profile'; S.profileOf = u; S.profileTab = 'grid'; $('#app').innerHTML = ''; render(); window.scrollTo({ top:0 }); break;
     case 'ufeed': closeSheet(); S.tab = 'ufeed'; S.profileOf = u; render(); { const el = document.getElementById('p-' + id); if (el) el.scrollIntoView(); } break;
     case 'archive-open': { const list = storiesOf(u); openViewer(list.map(s => ({ type:'story', s })), list.findIndex(s => s.id === id)); break; }
-    case 'recap': { const rc = [...weeklyRecaps(), ...monthlyRecaps()].find(r => r.id === id); if (rc) openViewer(recapItems(rc), 0); break; }
-    case 'story-of-us': openViewer(storyOfUs(), 0); break;
     case 'vnext': if (Date.now() - V.downAt < 250) nextItem(); break;
     case 'vprev': if (Date.now() - V.downAt < 250) prevItem(); break;
     case 'viewer-close': e.stopPropagation(); closeViewer(); break;
@@ -2017,100 +1854,85 @@ document.addEventListener('click', async e => {
       const cur = D.reactions.get(id + '|' + S.me), on = !(cur && cur.on);
       await put('reactions', { post_id:id, role:S.me, at:Date.now(), on });
       t.classList.toggle('on', on); t.innerHTML = on ? I.heartOn : I.heart;
-      if (on) { t.classList.add('bump'); const st = D.stories.get(id); if (st) Sync.push('like', `${nick(S.me)} gefällt deine Story ❤️`, st.text ? st.text.slice(0, 80) : ''); }
+      if (on) { t.classList.add('bump'); const st = D.stories.get(id); if (st) Sync.push('like', `${uname(S.me)} gefällt deine Story ❤️`, st.text ? st.text.slice(0, 80) : '', st.author); }
       break;
     }
     case 'viewer-profile': e.stopPropagation(); cancelAnimationFrame(V.raf); { const el = $('#viewer'); if (el) el.remove(); } document.body.style.overflow = '';
       S.tab = 'profile'; S.profileOf = u; S.profileTab = 'grid'; $('#app').innerHTML = ''; render(); window.scrollTo({ top:0 }); break;
-    case 'challenge': openChallenge(); break;
-    case 'challenge-go': openCreate('post', true); break;
-    case 'ping': sendPing(t.dataset.k); break;
-    case 'sos-ask': openSheet(`<h3 class="sh-title">🆘 „Komm vorbei“ senden?</h3><p class="muted" style="text-align:center;margin:0 0 14px">${esc(nick(other()))} bekommt einen Alarm mit deinem ungefähren Standort.</p>
-        <div class="menu"><button class="btn danger" data-act="sos-send" style="font-size:16px">Ja, Notfall senden</button><button class="btn" data-act="close-sheet">Abbrechen</button></div>`); break;
-    case 'sos-send': closeSheet(); sendPing('sos'); break;
-    case 'sound-sheet': openSoundSheet(); break;
-    case 'sound-pick': { const s = t.dataset.s; Sound.play(s); $$('.sounds button').forEach(b => b.classList.toggle('on', b === t)); const b = $('#ssend'); b.dataset.s = s; b.textContent = `${soundInfo(s)[1]} ${soundInfo(s)[2]} schicken`; break; }
-    case 'sound-send': closeSheet(); sendPing('sound', { sound:t.dataset.s }); break;
-    case 'reply': closeAlert(); sendPing(t.dataset.k); break;
-    case 'reply-chat': closeAlert(); S.tab = 'chat'; $('#app').innerHTML = ''; render(); break;
-    case 'replay': Sound.play(t.dataset.s); break;
-    case 'alert-close': closeAlert(); break;
     case 'settings': openSettings(); break;
     case 'edit-profile': openProfileEdit(); break;
     case 'e-emoji': E.emoji = t.dataset.e; if (S.tab !== 'editprof') { E.removePhoto = true; E.avatarPr = null; if (E.avatarURL) { URL.revokeObjectURL(E.avatarURL); E.avatarURL = null; } } $$('.emojis button').forEach(b => b.classList.toggle('on', b === t)); refreshEditAvatar(); if (S.tab === 'editprof') closeSheet(); break;
-    case 'e-sound': E.sound = t.dataset.s; Sound.play(E.sound); $$('.sounds button').forEach(b => b.classList.toggle('on', b === t)); { const l = $('#esndl'); if (l) l.textContent = `${soundInfo(E.sound)[1]} ${soundInfo(E.sound)[2]} ›`; } break;
+    case 'e-color': E.color = t.dataset.c; $$('[data-act=e-color]').forEach(b => b.style.border = b === t ? '3px solid var(--fg)' : '2px solid var(--line)'); { const c = $('#ecolor'); if (c) c.value = E.color; } break;
     case 'e-picmenu': openPicMenu(); break;
     case 'e-back': leaveEditProf(); break;
     case 'e-emojis': openSheet(`<h3 class="sh-title">Emoji als Profilbild</h3><div class="emojis">${EMOJIS.map(x => `<button data-act="e-emoji" data-e="${x}" class="${x === E.emoji ? 'on' : ''}">${x}</button>`).join('')}</div>`); break;
-    case 'e-sounds': { const x = $('#esnd'); x.style.display = x.style.display === 'none' ? 'block' : 'none'; break; }
     case 'e-nophoto': E.removePhoto = true; E.avatarPr = null; E.avatarURL = null; refreshEditAvatar(); if (S.tab === 'editprof') closeSheet(); break;
-    case 'e-save': await saveProfileForm(); closeSheet(); render(); toast('Gespeichert'); break;
     case 'push-test': {
       if (!Sync.ready) { toast('Nicht verbunden – Internet?'); break; }
       try {
-        const { data, error } = await Sync.sb.functions.invoke('send-push', { body:{ space_id:S.spaceId, kind:'test', title:'Unsergram 🔔', body:'Test: Benachrichtigungen kommen an ✓', self:true } });
+        const { data, error } = await Sync.sb.functions.invoke('send-push', { body:{ space_id:S.spaceId, kind:'test', title:`${APP_NAME} 🔔`, body:'Test: Benachrichtigungen kommen an ✓', self:true } });
         if (error) throw error;
         toast(data && data.sent ? `Gesendet an ${data.sent} Gerät(e) – App jetzt kurz schließen` : 'Kein Gerät registriert – bitte „Benachrichtigungen einschalten“');
       } catch (err) { toast('Test fehlgeschlagen: ' + (err.message || err)); }
       break;
     }
     case 'perm-push': try { await enablePush(); toast('Benachrichtigungen aktiv ✓'); } catch (err) { toast(err.message); } break;
-    case 'perm-geo': { const p = await getPos(); toast(p ? `Standort ok ✓ (±${p.acc} m)` : 'Standort nicht erlaubt oder nicht gefunden'); break; }
-    case 'invite': openInvite(); break;
     case 'howto': openHowto(); break;
-    case 'share-invite': try { await navigator.share({ title:APP_NAME, text:'Hier ist unser Unsergram 💛 Der Link ist dein Schlüssel:', url:inviteURL() }); } catch (_) { copyText(inviteURL()); } break;
-    case 'copy-invite': copyText(inviteURL()); break;
-    case 'switch-user': S.me = other(); await meta.set('device', { user:S.me, spaceId:S.spaceId, secret:S.secret }); closeSheet(); S.tab = 'home'; render(); toast(`Ansicht: ${nick(S.me)}`); break;
+    case 'circle': openCircle(); break;
+    case 'inv-new': {
+      const label = ($('#invfor').value || '').trim();
+      t.disabled = true; t.textContent = 'Wird erstellt …';
+      const r = await Sync.sb.rpc('create_invite', { p_space:S.spaceId, p_label:label });
+      if (r.error) { toast(r.error.message); t.disabled = false; t.textContent = 'Einladung erstellen'; break; }
+      showInvite(r.data.token, r.data.label || label); break;
+    }
+    case 'inv-share': showInvite(id, t.dataset.l); break;
+    case 'inv-native': try { await navigator.share({ title:APP_NAME, text:`Du bist in meinem ${APP_NAME} 💛 Der Link ist dein Schlüssel:`, url:inviteURL(id) }); } catch (_) { copyText(inviteURL(id)); } break;
+    case 'inv-copy': copyText(inviteURL(id)); break;
+    case 'inv-revoke': {
+      const r = await Sync.sb.rpc('revoke_invite', { p_token:id });
+      if (r.error) toast(r.error.message); else { toast('Einladung zurückgezogen'); openCircle(); }
+      break;
+    }
+    case 'rm-ask': openSheet(`<h3 class="sh-title">${esc(nick(u))} entfernen?</h3><p class="muted" style="text-align:center;margin:0 0 14px">${esc(nick(u))} sieht danach nichts mehr aus deinem Inner Circle. Der Platz wird frei.</p>
+        <div class="menu"><button class="btn danger" data-act="rm-go" data-u="${u}">Entfernen</button><button class="btn" data-act="circle">Abbrechen</button></div>`); break;
+    case 'rm-go': {
+      const r = await Sync.sb.rpc('remove_person', { p_space:S.spaceId, p_pid:u });
+      if (r.error) { toast(r.error.message); break; }
+      const pe = D.people.get(u); if (pe) { const row = { ...pe, removed_at:new Date().toISOString() }; D.people.set(u, row); DB.put('people', row, u); }
+      toast(`${nick(u)} wurde entfernt`); openCircle(); scheduleRender(); break;
+    }
+    case 'onb-invite': await finishOnb(); openCircle(); break;
     case 'onb-next': onbNext(); break;
-    case 'onb-new-ask': openSheet(`<h3 class="sh-title">Wirklich ganz neu?</h3>
-        <p class="muted" style="margin:0 0 14px">Nutzt ihr Unsergram schon? Dann bitte <b>nicht</b> neu einrichten – sonst entsteht ein zweiter, leerer Raum und ihr seht euch nicht mehr. Nimm stattdessen <b>Wiederherstellen</b> (dein Link aus den Einstellungen) oder die <b>Einladung</b> vom anderen.</p>
-        <div class="menu"><button class="btn" data-act="onb-new-cancel">Zurück – ich habe einen Link</button><button class="btn danger" data-act="onb-new-go">Ja, ganz neu einrichten</button></div>`); break;
-    case 'onb-new-cancel': closeSheet(); { const b = $('[data-act=onb-paste][data-r]'); if (b) b.click(); } break;
-    case 'onb-new-go': closeSheet(); onbNext(); break;
     case 'onb-here': S.onb.forceHere = true; render(); break;
+    case 'onb-start': if (location.hash || location.search) history.replaceState(null, '', location.pathname); S.onb = { step:'welcome', mode:'start' }; render(); break;
     case 'install': {
       let ok = false;
       if (S.installEvt) { const ev = S.installEvt; S.installEvt = null; ev.prompt(); try { ok = (await ev.userChoice).outcome === 'accepted'; } catch (_) {} }
-      if (ok) { S.installed = true; toast('Unsergram wird installiert ✓'); }
+      if (ok) { S.installed = true; toast(`${APP_NAME} wird installiert ✓`); }
       if (S.onb) { if (ok) render(); else onbNext(); } else closeSheet();
       break;
     }
     case 'copy-join': copyText(location.href); t.textContent = '✓ Kopiert – jetzt Teilen → Zum Home-Bildschirm'; break;
     case 'onb-paste': {
       $('#joinbox').style.display = 'block'; $$('[data-act=onb-paste]').forEach(b => b.style.display = 'none');
-      try { const c = await navigator.clipboard.readText(); if (/join=|restore=|^[a-f0-9]{16,}$/i.test(c.trim())) $('#joinin').value = c.trim(); } catch (_) {}
+      try { const c = await navigator.clipboard.readText(); if (JOIN_RX.test(c) || RESTORE_RX.test(c)) $('#joinin').value = c.trim(); } catch (_) {}
       $('#joinin').focus(); break;
     }
+    case 'onb-join': {
+      const v = ($('#joinin').value || '').trim(), rr = v.match(RESTORE_RX), mm = v.match(JOIN_RX);
+      if (rr) { t.disabled = true; t.textContent = 'Stelle wieder her …'; try { await doRestore(rr[1].toLowerCase()); } catch (err) { t.disabled = false; t.textContent = 'Weiter'; toast(err.message || 'Wiederherstellen fehlgeschlagen'); } break; }
+      if (!mm) { toast(`Das sieht nicht nach einem Link von ${APP_NAME} aus`); break; }
+      S.onb = { step:'welcome', mode:'join', token:mm[1].toLowerCase(), info:null }; render(); loadInviteInfo(); window.scrollTo(0, 0); break;
+    }
     case 'onb-restore-go': { const b = $('#rstgo'); if (b) { b.disabled = true; b.textContent = 'Stelle wieder her …'; }
-      try { await doRestore(S.onb.secret, S.onb.role); } catch (err) { if (b) { b.disabled = false; b.textContent = 'Nochmal versuchen'; } const e = $('#rsterr'); if (e) e.textContent = err.message || 'Fehlgeschlagen'; else toast(err.message || 'Fehlgeschlagen'); } break; }
+      try { await doRestore(S.onb.restore); } catch (err) { if (b) { b.disabled = false; b.textContent = 'Nochmal versuchen'; } const x = $('#rsterr'); if (x) x.textContent = err.message || 'Fehlgeschlagen'; else toast(err.message || 'Fehlgeschlagen'); } break; }
     case 'restore-link': openRestoreLink(); break;
     case 'flush-now': if (!Sync.ready) await Sync.start(); await Outbox.flush(); closeSheet(); openSettings(); break;
     case 'copy-restore': copyText(restoreURL()); break;
-    case 'share-restore': try { await navigator.share({ title:'Unsergram – Wiederherstellen', url:restoreURL() }); } catch (_) { copyText(restoreURL()); } break;
-    case 'onb-join': {
-      const v = ($('#joinin').value || '').trim(), rr = v.match(RESTORE_RX);
-      if (rr) { t.disabled = true; t.textContent = 'Stelle wieder her …'; try { await doRestore(rr[1], rr[2].toLowerCase()); } catch (err) { t.disabled = false; t.textContent = 'Verbinden'; toast(err.message || 'Wiederherstellen fehlgeschlagen'); } break; }
-      const mm = v.match(/join=([a-f0-9]{16,})/i) || v.match(/^([a-f0-9]{16,})$/i);
-      if (!mm) { toast('Das sieht nicht nach einem Link von Unsergram aus'); break; }
-      S.onb.mode = 'join'; S.onb.secret = mm[1]; S.onb.step = 'who'; render(); window.scrollTo(0, 0); break;
-    }
-    case 'onb-who': {
-      S.onb.role = u;
-      if (S.onb.mode === 'join' && Sync.configured) {
-        $$('[data-act=onb-who]').forEach(b => b.disabled = true); t.textContent = 'Verbinde …';
-        try {
-          await Sync.ensureAuth();
-          const r = await Sync.sb.rpc('join_space', { p_secret:S.onb.secret, p_role:u }); if (r.error) throw r.error;
-          S.onb.joined = r.data;
-          const pr = await Sync.sb.from('profiles').select('*').eq('space_id', r.data.space_id);
-          (pr.data || []).forEach(row => { D.profiles.set(row.role, row); DB.put('profiles', row, row.role); });
-        } catch (err) { toast(err.message || 'Verbindung fehlgeschlagen'); S.onb.joined = null; render(); break; }
-      }
-      S.onb.step = 'profile'; render(); window.scrollTo(0, 0); break;
-    }
+    case 'share-restore': try { await navigator.share({ title:`${APP_NAME} – Wiederherstellen`, url:restoreURL() }); } catch (_) { copyText(restoreURL()); } break;
     case 'onb-profile': onbProfile(); break;
     case 'onb-push': try { await enablePush(); const p = $('#pushst'); if (p) p.innerHTML = '<span class="ok">✓ Benachrichtigungen aktiv</span>'; setTimeout(onbNext, 700); } catch (err) { const p = $('#pushst'); if (p) p.textContent = err.message; } break;
-    case 'onb-geo': { const p = await getPos(); const st = $('#geost'); if (st) st.innerHTML = p ? '<span class="ok">✓ Standort erlaubt</span>' : 'Nicht erlaubt – geht auch später.'; setTimeout(onbNext, 700); break; }
   }
 });
 document.addEventListener('change', async e => {
@@ -2124,7 +1946,9 @@ document.addEventListener('change', async e => {
 });
 document.addEventListener('input', e => {
   if (e.target.id === 'ctext') updatePreview();
-  if (e.target.id === 'ebio') { const c = $('#ebioc'); if (c) c.textContent = e.target.value.length + '/150'; }
+  if (e.target.id === 'ecolor') { E.color = e.target.value; $$('[data-act=e-color]').forEach(b => b.style.border = '2px solid var(--line)'); }
+  if (e.target.id === 'euname') { const c = e.target.selectionStart, v = slug(e.target.value); if (v !== e.target.value) { e.target.value = v; try { e.target.setSelectionRange(c, c); } catch (_) {} } E.unameTouched = true; }
+  if (e.target.id === 'enick' && S.onb && !E.unameTouched) { const un = $('#euname'); if (un) un.value = slug(e.target.value); }
   if (e.target.id === 'q') { S.q = e.target.value; const r = $('#sres'); if (r) { r.innerHTML = gridHTML(searchPosts()); hydrate(r); } }
 });
 document.addEventListener('submit', e => {
@@ -2132,15 +1956,15 @@ document.addEventListener('submit', e => {
   if (f) { e.preventDefault(); addComment(f.dataset.id, f.elements.t.value); return; }
   if (e.target.id === 'vreply') {
     e.preventDefault(); const i = $('#vrin'); const v = (i.value || '').trim(); if (!v) return;
-    const st = D.stories.get(e.target.dataset.id);
-    put('messages', { id:newId(), author:S.me, text:`↩️ Zu deiner Story${st && st.text ? ' „' + st.text.slice(0, 40) + '“' : ''}: ${v}`, created_at:Date.now(), read_at:null, deleted:false });
-    Sync.push('message', nick(S.me), `↩️ Antwort auf deine Story: ${v.slice(0, 100)}`);
+    const st = D.stories.get(e.target.dataset.id); if (!st) return;
+    put('messages', { id:newId(), author:S.me, to_pid:st.author, text:`↩️ Zu deiner Story${st.text ? ' „' + st.text.slice(0, 40) + '“' : ''}: ${v}`, created_at:Date.now(), read_at:null, deleted:false });
+    Sync.push('message', nick(S.me), `↩️ Antwort auf deine Story: ${v.slice(0, 100)}`, st.author);
     i.value = ''; i.blur(); toast('Gesendet ✓'); return;
   }
   if (e.target.id === 'cbar') { e.preventDefault(); const i = $('#cmsg'); const v = i.value; i.value = ''; sendMessage(v); i.focus(); }
 });
 document.addEventListener('keydown', e => {
-  if (!$('#viewer')) { if (e.key === 'Escape') { closeSheet(); closeAlert(); } return; }
+  if (!$('#viewer')) { if (e.key === 'Escape') closeSheet(); return; }
   if (e.target && e.target.id === 'vrin') return;
   if (e.key === 'Escape') closeViewer();
   if (e.key === 'ArrowRight') nextItem();
@@ -2210,6 +2034,7 @@ async function refreshAll(){
   }
 }
 
+
 /* ---------- Start ---------- */
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); S.installEvt = e; if (S.onb && S.onb.step === 'home') render(); });
 window.addEventListener('appinstalled', () => { S.installed = true; S.installEvt = null; if (S.onb && S.onb.step === 'home') render(); });
@@ -2221,25 +2046,25 @@ async function boot(){
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') navigator.serviceWorker.getRegistration().then(r => r && r.update()).catch(() => {}); });
   }
   for (const t of Object.keys(TABLES)) (await DB.entries(t)).forEach(([k, v]) => D[t].set(k, v));
-  S.handled = new Set((await meta.get('handled')) || []);
-  S.recapSeen = new Set((await meta.get('recapSeen')) || []);
   S.feedMode = (await meta.get('feedMode')) || 'all';
   S.actSeen = (await meta.get('actSeen')) || 0;
   const dev = await meta.get('device');
   const hs = location.hash + ' ' + location.search;
-  const m = hs.match(/join=([a-f0-9]{16,})/i), rh = hs.match(RESTORE_RX);
-  if (dev && dev.user) {
-    S.me = dev.user; S.spaceId = dev.spaceId || 'local'; S.secret = dev.secret || null;
-    if (m && m[1] !== S.secret) toast('Dieses Handy ist schon verbunden.');
+  const m = hs.match(JOIN_RX), rh = hs.match(RESTORE_RX);
+  if (dev && dev.pid) {
+    S.me = dev.pid; S.spaceId = dev.spaceId; S.isOwner = !!dev.isOwner; S.restore = dev.restore || null;
+    if (m) toast('Dieses Handy ist schon dabei.');
     if (location.hash || location.search) history.replaceState(null, '', location.pathname);
     render(); Sync.start().then(scheduleRender);
+  } else if (rh) {
+    S.onb = { step:'welcome', mode:'restore', restore:rh[1].toLowerCase() }; render();
+  } else if (m) {
+    S.onb = { step:'welcome', mode:'join', token:m[1].toLowerCase(), info:null }; render(); loadInviteInfo();
   } else {
-    S.onb = rh ? { step:'welcome', mode:'restore', secret:rh[1], role:rh[2].toLowerCase() } : { step:'welcome', mode:m ? 'join' : 'new', secret:m ? m[1] : null, role:null };
-    render();
+    S.onb = { step:'welcome', mode:'start' }; render();
   }
 }
 boot().catch(err => { $('#app').innerHTML = `<div class="empty"><b>Speicher nicht verfügbar</b>${esc(err.message || err)}<br>Im privaten Modus funktioniert die App nicht.</div>`; });
-
 </script>
 </body>
 </html>
