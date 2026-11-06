@@ -100,7 +100,7 @@ function postHTML(p){
   cm += `<button class="link" data-act="comments" data-id="${p.id}">Kommentar hinzufügen …</button>`;
   return `<article class="post" id="p-${p.id}">
     <header class="ph"><button class="who" data-act="profile" data-u="${p.author}">${avatar(p.author, 38)}</button>
-      <div class="phn" data-act="profile" data-u="${p.author}"><b>${esc(uname(p.author))}</b><small>${esc(nick(p.author))}</small></div>
+      <div class="phn" data-act="profile" data-u="${p.author}"><b>${esc(uname(p.author))}</b></div>
       <button class="icon-btn more" data-act="post-menu" data-id="${p.id}" aria-label="Mehr">${I.burger}</button></header>
     ${media}
     <div class="pa">
